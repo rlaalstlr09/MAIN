@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import './Calendar.css';
+import './PlannerCalendar.css';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 class CalendarPage extends Component {
     render() {
         const events = [
-            { title : 'Planner1', date : '2023-09-20' },
+            { title : 'Planner', date : '2023-09-20' },
         ]
         const calendarOptions = {
             defaultView: "dayGridMonth",
@@ -16,11 +18,16 @@ class CalendarPage extends Component {
 
         return (
            
-          <div className="App" style={{ width: "70%", height: "70%", alignContent : "center"}}>
+          <div className="App">
             
             <div className="calendar">
                 <br></br>
                 <FullCalendar {...calendarOptions} />
+            </div>
+
+            
+            <div className="Button">
+                <Button variant="contained" className="write" component={Link} to="/main">계획표 작성</Button>
             </div>
           </div>
         );

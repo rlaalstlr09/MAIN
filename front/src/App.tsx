@@ -5,8 +5,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import MapPage from './views/Map';
-import CalendarPage from './views/Calendar';
+import MapPage from './views/MainMap';
+import CalendarPage from './views/PlannerCalendar';
 
 export default function LabTabs() {
   const [value, setValue] = React.useState('1');
