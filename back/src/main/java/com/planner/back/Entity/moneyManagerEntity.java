@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Entity(name="moneyManager")
 @Table(name="moneyManager")
 
-public class moneyManagerEntity {
+public class MoneyManagerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mNum;
+    private int id;
     private String time;
     private int inMoney;
     private int outMoney;

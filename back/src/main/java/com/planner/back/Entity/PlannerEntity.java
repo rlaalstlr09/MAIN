@@ -10,13 +10,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="User")
-@Table(name="User")
-public class UserEntity {
+@Entity(name="planner")
+@Table(name="planner")
+public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
-    private String nickname;
-
+    private String start_time;
+    private String end_time;
+    private String date;
+    private String todo;
+    private String memo;
 }

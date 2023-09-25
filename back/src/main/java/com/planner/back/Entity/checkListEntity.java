@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name="checkList")
 @Table(name="checkList")
-public class checkListEntity {
+public class CheckListEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cNum;
+    private int id;
     private String email;
     private String todo;
     private String place;
