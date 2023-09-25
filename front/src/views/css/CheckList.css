@@ -4,11 +4,6 @@
     height: 100vh;
   }
   
-.calendar {
-    width: 60%;
-    height: 60%;
-  }
-
 .Button{
   display: flex;
   margin-left:10px;
