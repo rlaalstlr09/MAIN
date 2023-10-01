@@ -6,7 +6,7 @@ import TabList from '@mui/lab/TabList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import MapPage from './views/MainMap';
-import CalendarPage from './views/PlannerCalendar';
+import CalendarPage from './views/Planner';
 import PWritePage from './views/PlannerWrite';
 import CWritePage from './views/CheckListWrite'
 import CheckPage from './views/CheckList'

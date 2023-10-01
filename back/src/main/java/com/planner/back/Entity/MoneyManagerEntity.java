@@ -17,9 +17,10 @@ public class MoneyManagerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String time;
+    private String date;
+    private String email;
     private int inMoney;
     private int outMoney;
-    private String whereUse;
+    private String place;
     private int headCount;
 }
