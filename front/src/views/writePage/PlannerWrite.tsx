@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function PWritePage() {
 
@@ -14,12 +14,12 @@ export default function PWritePage() {
     const [end_time, setEnd_time] = useState('');
     const [place, setPlace] = useState('');
     const [memo, setMemo] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:8080/planner', {
+            const response = await axios.post('http://localhost:8080/api/planner', {
               title,
               todo,
               date,
@@ -30,7 +30,8 @@ export default function PWritePage() {
             });
 
              if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우
-                 alert(response.data); // 서버로부터 받은 메시지를 alert 창으로 출력
+                alert('저장되었습니다.'); // 서버로부터 받은 메시지를 alert 창으로 출력
+                navigate(`/calendar`);
       }
             
             setTitle('');

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CheckController {
     private final CheckListRepository repository;
 
-    @PostMapping("/check")
+    @PostMapping("/api/check")
     public ResponseEntity<?> createCheckList(@RequestBody CheckListEntity check){
         try {
             repository.save(check);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './css/CheckList.css';
+import '../css/CheckList.css';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 

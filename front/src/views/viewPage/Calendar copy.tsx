@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import './css/Planner.css';
+import '../css/Planner.css';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+
+
+interface Planner{
+    id : number;
+    title: string;
+    date: string;
+}
 
 class CalendarPage extends Component {
     render() {
@@ -32,5 +39,3 @@ class CalendarPage extends Component {
         );
     }
 }
-
-export default CalendarPage;

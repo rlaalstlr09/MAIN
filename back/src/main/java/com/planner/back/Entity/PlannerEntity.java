@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,10 +18,12 @@ public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int pNum;
+    private String title;
     private String email;
     private String start_time;
     private String end_time;
-    private String date;
+    private Date date;
     private String todo;
     private String memo;
 }

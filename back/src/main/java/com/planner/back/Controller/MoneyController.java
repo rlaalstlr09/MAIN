@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MoneyController {
     private final MoneyManagerRepopsitory repository;
 
-    @PostMapping("/money")
+    @PostMapping("/api/money")
     public ResponseEntity<?> createMoneyManager(@RequestBody MoneyManagerEntity money){
         try {
             repository.save(money);
