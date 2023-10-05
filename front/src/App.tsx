@@ -6,12 +6,12 @@ import TabList from '@mui/lab/TabList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import MapPage from './views/viewPage/MainMap';
-import CalendarPage from './views/viewPage/Calendar';
+import CalendarPage from './views/ListPage/Calendar';
 import PWritePage from './views/writePage/PlannerWrite';
 import CWritePage from './views/writePage/CheckListWrite'
-import CheckPage from './views/viewPage/CheckList'
+import CheckPage from './views/ListPage/AllCheckList'
 import MWritePage from './views/writePage/MoneyManagerWrite'
-import MoneyPage from './views/viewPage/MoneyManager'
+import MoneyPage from './views/ListPage/AllMoneyManager'
 import PlannerPage from './views/viewPage/Planner'
 
 export default function LabTabs() {

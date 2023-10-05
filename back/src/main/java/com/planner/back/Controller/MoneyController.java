@@ -1,14 +1,14 @@
 package com.planner.back.Controller;
 
 import com.planner.back.Entity.MoneyManagerEntity;
+import com.planner.back.Entity.PlannerEntity;
 import com.planner.back.Repository.MoneyManagerRepopsitory;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,5 +28,16 @@ public class MoneyController {
         } catch (Exception e) {
             return new ResponseEntity<>("예산관리 작성 에러", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/api/money")
+    public List<MoneyManagerEntity> getAllMoneyManager(){
+        return repository.findAll();
+    }
+
+    @GetMapping("/api/money/{id}")
+    public MoneyManagerEntity getMoneyManager(@PathVariable Long id) {
+
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("MoneyManager not found with id " + id));
     }
 }

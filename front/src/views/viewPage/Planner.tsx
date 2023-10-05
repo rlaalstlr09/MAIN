@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface Planner {
+  end_time: string;
   id: number;
   title: string;
   todo: string;
-  startTime: string;
+  start_time: string;
   place: string;
   memo: string;
 }
@@ -30,7 +31,8 @@ export default function PlannerPage() {
      <div>
        <h2>{planner.title}</h2>
        <p>Todo: {planner.todo}</p>
-       <p>Start Time: {planner.startTime}</p>
+       <p>Start Time: {planner.start_time}</p>
+       <p>End Time: {planner.end_time}</p>
        <p>Place: {planner.place}</p>
        <p>Memo: {planner.memo}</p>
      </div>

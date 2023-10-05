@@ -21,6 +21,7 @@ public class PlannerEntity {
     private int pNum;
     private String title;
     private String email;
+    private String place;
     private String start_time;
     private String end_time;
     private Date date;
