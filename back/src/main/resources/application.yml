@@ -32,6 +32,14 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: {78381076150-8e8lrtqv3f37clo72fq9o1t9ast0bbls.apps.googleusercontent.com}
+            client-secret: {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}
+
 logging:
   level:
     org:
