@@ -35,7 +35,7 @@ export default function LabTabs() {
         </Box> 
        
           <Routes>
-            <Route path="/main" element={<MapPage />} />
+            <Route path="/main" element={<MapPage searchPlace={undefined} />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/calendar/planner/write" element={<PWritePage />} />
             <Route path="/calendar/planner/:id" element={<PlannerPage />} />
