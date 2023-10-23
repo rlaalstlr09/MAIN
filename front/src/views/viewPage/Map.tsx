@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { propsType } from './MapLanding';
-import '../css/Map.css'; 
+import '../css/Map.css';
 
 interface placeType {
   place_name: string,
@@ -13,18 +13,12 @@ interface placeType {
 // head에 작성한 Kakao API 불러오기
 const { kakao } = window as any;
 
-const MapPage = (props: propsType) => {
+const Map = (props: propsType) => {
   // 마커를 담는 배열
   let markers: any[] = [];
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services,clusterer";
-    script.async = true;
-
-    // 'load' 이벤트 리스너 추가
-    script.addEventListener('load', () => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -245,8 +239,8 @@ const MapPage = (props: propsType) => {
           el.removeChild (el.lastChild);
       }
     }
-  })
-  }, [props.searchKeyword]) // here
+
+  }, [props.searchKeyword])
 
   return (
     <div className="map-container">
@@ -267,4 +261,4 @@ const MapPage = (props: propsType) => {
   )
 }
 
-export default MapPage
+export default Map
