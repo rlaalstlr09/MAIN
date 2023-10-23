@@ -1,41 +1,41 @@
-import React from 'react';
-import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
-import axios from 'axios';
+// import React, { Component } from 'react';
 
-const clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+// declare global {
+//   interface Window {
+//     google: any;
+//   }
+// }
 
-const GoogleSignInButton = () => {
-  const handleLogin = async (res : GoogleLoginResponse) => {
-    console.log('Login Success:', res.profileObj);
-    
-    try{
-        const response = await axios.post('/api/login', { idtoken : res.tokenId });
-        // Handle successful response here.
-        console.log(response.data);
-        
-    }catch(err){
-        // Handle error here.
-        console.error(err);
-        
-    }
-  };
+// interface GoogleResponse {
+//   credential: string;
+// }
 
-  const onSuccess = (res: GoogleLoginResponse | any) => {
-    handleLogin(res);
-  };
+// class GoogleSignInButton extends Component {
+//   componentDidMount() {
+//     window.google.accounts.id.initialize({
+//       client_id: '444728658488-bcjatt5fqktq6cnrr57hkv7nb0jbb0c5.apps.googleusercontent.com',
+//       callback: this.handleCredentialResponse,
+//     });
+//     window.google.accounts.id.renderButton(
+//       document.getElementById('google-signin-btn'),
+//       {}  // customization options
+//     );
+//   }
 
-  const onFailure = (res : any) => {
-    console.log('Login failed: ', res);
-  };
+//   handleCredentialResponse = (response: GoogleResponse) => {
+//     console.log(response);
+//     // 여기서 백엔드 서버에 인증 정보를 보내서 세션을 생성하거나 JWT 토큰을 받아옵니다.
+//   };
 
-  return (
-      <GoogleLogin
-          clientId={clientId}
-          buttonText="Sign in with Google"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-      />
-   );
-};
+//   render() {
+//     return (
+//       <div>
+//         <button id="google-signin-btn">Sign in with Google</button>
+//       </div>
+//     );
+//   }
+// }
 
-export default GoogleSignInButton;
+// export default GoogleSignInButton;
+
+export{};
