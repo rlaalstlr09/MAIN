@@ -8,9 +8,9 @@ interface MoneyManager {
     id: number;
     date: string;
     place: string;
-    in_money: string;
-    out_money:string;
-    head_count:string;
+    in_money: number;
+    out_money:number;
+    head_count:number;
 
   }
 
@@ -33,14 +33,37 @@ export default function MoneyPage() {
     return (
         <div className="App">    
             <h4>예산관리</h4><br/>
-            {moneyManager.map(moneyManager =>
-            <div key={moneyManager.id}>
-                <br/>
-                <p>Date : {moneyManager.date}</p>
-                <p>Place : {moneyManager.place}</p>
-                <p>inMoney : {moneyManager.in_money}</p>
-                <p>outMoney : {moneyManager.out_money}</p>
-                <p>headCount : {moneyManager.head_count}</p>
+            {moneyManager.map((item:MoneyManager) =>
+            <div key={item.id}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>날짜</th>
+                    <th>장소</th>
+                    <th>입금</th>
+                    <th>출금</th>
+                    <th>인원수</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{item.id}</td>
+                    <td>{item.date}</td>
+                    <td>{item.place}</td>
+                    <td>{item.in_money}</td>
+                    <td>{item.out_money}</td>
+                    <td>{item.head_count}</td>
+                    <td>
+                      <form>
+                        <input type="submit" name="update_" value="수정"></input>
+                        <input type="submit" name="delete_" value="삭제"></input>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>)}
             <div className="Button">
                 <br/>

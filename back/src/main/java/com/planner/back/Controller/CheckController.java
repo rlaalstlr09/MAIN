@@ -27,6 +27,7 @@ public class CheckController {
             repository.save(check);
             return new ResponseEntity<>("체크리스트 작성 성공", HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>("체크리스트 작성 에러", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

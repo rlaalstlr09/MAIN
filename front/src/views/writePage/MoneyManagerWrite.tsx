@@ -63,6 +63,7 @@ export default function MWritePage() {
             <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={e=> setInMoney(e.target.value)}/><br/>
             <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={e=> setHeadCount(e.target.value)}/><br/>
             <Button type = "submit"variant="contained" className="write">저장</Button>
+            <input type="reset" value="취소"></input>
         </Box>
     );
   }

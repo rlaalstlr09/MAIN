@@ -41,10 +41,11 @@ spring:
             client-secret: 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
             scope: profile, email
 
-logging:
   level:
     org:
       hibernate:
         type:
           descriptor:
             sql: trace
+
+

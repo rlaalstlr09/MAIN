@@ -1,8 +1,8 @@
 import React, {Component, useEffect, useState} from 'react';
-import '../css/CheckList.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Table from 'react-bootstrap/Table';
 
 interface CheckList {
     id: number;
@@ -29,12 +29,31 @@ export default function CheckPage() {
     return (
         <div className="App">
             <h4>체크리스트</h4><br/>
-            {checkList.map(checkList =>
-            <div key={checkList.id}>
-                <br/>
-                <p>Todo : {checkList.todo}</p>
-                <p>Place : {checkList.place}</p>
-            </div>)}
+            
+            {checkList.map((item : CheckList)=>
+            item.id && (
+            <div>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>todo</th>
+                    <th>place</th>
+                  </tr>
+                </thead>
+                {checkList.map((item:CheckList) =>
+                (<tbody key={item.id}>
+                  <tr>
+                    <td>{item.id}</td>
+                    <td>{item.todo}</td>
+                    <td>{item.place}</td>
+                  </tr>
+                </tbody>)
+                )}
+              </table>
+                
+            </div>)
+            )}
             
             <div className="Button">
                 <Button variant="contained" className="write" component={Link} to="/check/write">체크리스트 작성</Button>
