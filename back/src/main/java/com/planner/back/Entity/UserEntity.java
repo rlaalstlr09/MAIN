@@ -1,12 +1,11 @@
 package com.planner.back.Entity;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +16,14 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    private String nickname;
+    private String name;
+    private String role;
+    private String provider;
+    private String providerId;
 
+
+    public UserEntity(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }

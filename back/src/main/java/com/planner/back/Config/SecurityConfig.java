@@ -1,5 +1,9 @@
 package com.planner.back.Config;
 
+
+import com.planner.back.Service.OAuth2LoginSuccessHandler;
+import com.planner.back.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,43 +23,27 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final UserService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .cors(withDefaults())
-                .authorizeRequests(authz -> authz
+        http.cors(cors->cors.disable())
+                .csrf(csrf->csrf.disable())
+                .authorizeRequests(authz->authz
                         .requestMatchers("/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .oauth2Login((oauth2) -> oauth2
-                        .defaultSuccessUrl("/loginSuccess"))
-                .logout((logout) -> logout
+                .oauth2Login(oauth2 ->oauth2
+                        .successHandler(new OAuth2LoginSuccessHandler(userService)))
+
+                .logout(logout -> logout
                         .logoutSuccessUrl("/logout")
                         .permitAll());
-
-
         return http.build();
     }
 
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(false);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        config.setMaxAge(6000L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-
-        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
-        filterBean.setOrder(0);
-
-        return filterBean;
-    }
 }

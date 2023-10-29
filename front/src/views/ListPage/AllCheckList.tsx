@@ -1,14 +1,20 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import Table from 'react-bootstrap/Table';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 interface CheckList {
     id: number;
     todo: string;
     place: string; 
-  }
+}
+
+const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'todo', headerName: 'Todo', width: 130 },
+    { field: 'place', headerName: 'Place', width: 130 },
+];
 
 export default function CheckPage() {
     const [checkList, setCheckList] = useState<CheckList[]>([]);
@@ -28,36 +34,25 @@ export default function CheckPage() {
   
     return (
         <div className="App">
-            <h4>체크리스트</h4><br/>
             
-            {checkList.map((item : CheckList)=>
-            item.id && (
-            <div>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>todo</th>
-                    <th>place</th>
-                  </tr>
-                </thead>
-                {checkList.map((item:CheckList) =>
-                (<tbody key={item.id}>
-                  <tr>
-                    <td>{item.id}</td>
-                    <td>{item.todo}</td>
-                    <td>{item.place}</td>
-                  </tr>
-                </tbody>)
-                )}
-              </table>
-                
-            </div>)
-            )}
+            
+            <div style={{ height: 400, width: '100%' }}>
+            <h4>체크리스트</h4><br/>
+                <DataGrid
+                    rows={checkList}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                      },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                />
+            </div>
             
             <div className="Button">
-                <Button variant="contained" className="write" component={Link} to="/check/write">체크리스트 작성</Button>
-                    
+                <Button variant="contained" className="write" component={Link} to="/check/write">체크리스트 작성</Button>  
              </div>
         </div>
     );

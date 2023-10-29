@@ -8,16 +8,20 @@ import CheckPage from './views/ListPage/AllCheckList'
 import MWritePage from './views/writePage/MoneyManagerWrite'
 import MoneyPage from './views/ListPage/AllMoneyManager'
 import PlannerPage from './views/viewPage/Planner'
-// import LoginBtnPage from './views/Login/LoginButton'
+import LoginBtnPage from './views/Login/LoginButton'
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
 import React from 'react';
 import LandingPage from './views/viewPage/MapLanding';
+import Header from './views/fragments/Header'
 
 export default function App() {
   
   return (
+    <div>
+      
     <Router>
+      <Header />
        
           <Routes>
             <Route path="/main" element={<MainPage />} />
@@ -29,10 +33,11 @@ export default function App() {
             <Route path="/check/write" element={<CWritePage />} />
             <Route path="/money" element={<MoneyPage />} />
             <Route path="/money/write" element={<MWritePage />} />
-            {/* <Route path="/" element={<LoginBtnPage />} /> */}
+            <Route path="/" element={<LoginBtnPage />} /> 
           </Routes>
         
       
     </Router>
+    </div>
   );
 }
