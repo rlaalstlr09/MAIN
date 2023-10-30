@@ -2,6 +2,8 @@ package com.planner.back.Controller;
 
 import com.planner.back.Entity.PlannerEntity;
 import com.planner.back.Repository.PlannerRepository;
+import com.planner.back.Service.SessionService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +18,16 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @RestController
-@CrossOrigin(originPatterns = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PlannerController {
     @Autowired
     private final PlannerRepository repository;
+    private final SessionService sessionService;
 
     @PostMapping("/api/planner")
-    public ResponseEntity<?> createPlanner(@RequestBody PlannerEntity planner){
+    public ResponseEntity<?> createPlanner(HttpServletRequest request,  @RequestBody PlannerEntity planner){
         try {
+            planner.setEmail(sessionService.getCurrentUserEmail(request));
             repository.save(planner);
             return new ResponseEntity<>("계획표 작성 성공", HttpStatus.OK);
         } catch (Exception e) {
@@ -32,8 +36,8 @@ public class PlannerController {
     }
 
     @GetMapping("/api/planner")
-    public List<PlannerEntity> getAllPlanner(){
-        return repository.findAll();
+    public List<PlannerEntity> getAllPlanner(HttpServletRequest request){
+        return repository.findByEmail(sessionService.getCurrentUserEmail(request));
     }
 
     @GetMapping("/api/planner/{id}")

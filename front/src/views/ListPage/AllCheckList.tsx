@@ -25,7 +25,9 @@ export default function CheckPage() {
     }
   
     useEffect(() => {
-      axios.get(`http://localhost:8080/api/check`)
+      axios.get(`http://localhost:8080/api/check`, {
+        withCredentials: true
+      })
         .then(response => {
           setCheckList(response.data);
         })

@@ -1,6 +1,9 @@
 
 server:
   port: 8080
+  servlet:
+    cookie:
+      same-site: None
 spring:
   application:
     name: Planner

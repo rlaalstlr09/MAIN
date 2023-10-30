@@ -18,6 +18,9 @@ export default function CWritePage() {
             const response = await axios.post('http://localhost:8080/api/check', {
               place,
               todo,
+              
+            },{
+                withCredentials: true
             });
 
              if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우

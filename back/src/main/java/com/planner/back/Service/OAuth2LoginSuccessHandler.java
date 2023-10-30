@@ -38,6 +38,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
             userService.save(newUser);
         }
+        request.getSession().setAttribute("email", email);
+        System.out.println("User info in session: " + request.getSession().getAttribute("email"));
         response.sendRedirect("http://localhost:3000/");
 
     }

@@ -3,6 +3,7 @@ package com.planner.back.Controller;
 import com.nimbusds.jose.Payload;
 import com.planner.back.Entity.UserEntity;
 import com.planner.back.Service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -19,10 +20,9 @@ public class LoginController {
     private UserService userService;
 
 
-    @GetMapping("/loginSuccese")
-    public OAuth2User user(OAuth2AuthenticationToken token) {
-        return token.getPrincipal();
+    @GetMapping("/api/session")
+    public String getSessionUserInfo(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute("email");
+
     }
-
-
 }

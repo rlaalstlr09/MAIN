@@ -21,7 +21,9 @@ export default function CalendarPage() {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/planner`)
+    axios.get(`http://localhost:8080/api/planner`,{
+      withCredentials: true
+  })
       .then(response => {
         setPlanners(response.data);
       })

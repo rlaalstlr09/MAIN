@@ -23,7 +23,9 @@ export default function MoneyPage() {
     }
   
     useEffect(() => {
-      axios.get(`http://localhost:8080/api/money`)
+      axios.get(`http://localhost:8080/api/money`,{
+        withCredentials: true
+    })
         .then(response => {
           setMoneyManager(response.data);
         })

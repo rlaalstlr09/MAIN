@@ -27,6 +27,8 @@ export default function PWritePage() {
               end_time,
               place,
               memo
+            },{
+                withCredentials: true
             });
 
              if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우
