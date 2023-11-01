@@ -53,8 +53,8 @@ export default function CWritePage() {
             <h4>계획표 작성</h4><br/>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <Button type = "submit"variant="contained" className="write">저장</Button>
-            <input type="reset" value="취소"></input>
+            <Button type = "submit" variant="contained" className="write">저장</Button>
+            <Button type = "reset" variant="contained" className="reset">취소</Button>
         </Box>
     );
   }

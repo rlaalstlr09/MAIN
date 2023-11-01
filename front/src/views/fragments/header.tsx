@@ -1,7 +1,8 @@
 import { TabContext, TabList } from "@mui/lab";
-import { Box, Tab } from "@mui/material";
+import { Box, Button, Tab } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../Login/Logout";
 
 export default function Header() {
     const [value, setValue] = React.useState('1');
@@ -20,7 +21,8 @@ return(
                         <Tab label="계획표" component={Link} to="/calendar" />
                         <Tab label="체크리스트" component={Link} to="/check" />
                         <Tab label="예산관리" component={Link} to="/money" />
-                        <input type="submit" name="login_" value="로그인"></input>
+                        <Button variant="contained" className="write" component={Link} to="/">로그인</Button>  
+                        <LogoutButton />
                         </TabList>
 
                         

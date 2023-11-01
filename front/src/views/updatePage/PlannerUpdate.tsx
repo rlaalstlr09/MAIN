@@ -32,7 +32,7 @@ export default function PWritePage() {
             });
 
              if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우
-                alert('저장되었습니다.'); // 서버로부터 받은 메시지를 alert 창으로 출력
+                alert('수정되었습니다.'); // 서버로부터 받은 메시지를 alert 창으로 출력
                 navigate(`/calendar`);
       }
             
@@ -45,7 +45,7 @@ export default function PWritePage() {
             setMemo('');
 
         } catch (error) {
-            console.error('계획표 작성 에러', error);
+            console.error('계획표 수정 에러', error);
             if ((error as AxiosError).response && (error as AxiosError).response?.data) { 
                 alert((error as AxiosError).response?.data); // 에러 메시지를 alert 창으로 출력
             }
@@ -70,7 +70,7 @@ export default function PWritePage() {
             <TextField fullWidth label="시작 시간" id="_start_time" value={start_time} onChange={e=> setStart_time(e.target.value)}/> ~ <TextField fullWidth label="끝 시간" id="_end_time" value={end_time} onChange={e=> setEnd_time(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/><br/>
-            <Button type = "submit"variant="contained" className="write">저장</Button>
+            <Button type = "submit"variant="contained" className="write">수정</Button>
             <Button type = "reset" variant="contained" className="reset">취소</Button>
         </Box>
     );

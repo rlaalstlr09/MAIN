@@ -22,4 +22,5 @@ public class CheckListEntity {
     private String todo;
     private String place;
     private boolean chk;
+    private boolean del;
 }

@@ -27,4 +27,5 @@ public class PlannerEntity {
     private Date date;
     private String todo;
     private String memo;
+    private boolean del;
 }

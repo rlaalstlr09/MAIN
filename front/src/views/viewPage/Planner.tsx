@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 interface Planner {
   end_time: string;
@@ -12,9 +12,27 @@ interface Planner {
   memo: string;
 }
 
+
+
 export default function PlannerPage() {
   const [planner, setPlanner] = useState<Planner | null>(null);
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const handleUpdate = async (id: number) => {
+    navigate(`/calendar/check/update/${id}`);
+  };
+  
+  const handleDelete = async (id: number) => {
+    try {
+        await axios.delete(`http://localhost:8080/api/planner/${id}`, { withCredentials: true });
+        alert('삭제 성공');
+        const response = await axios.get(`http://localhost:8080/api/planner/${id}`, { withCredentials: true });
+        setPlanner(response.data);
+    } catch (error) {
+        console.error('삭제 에러', error);
+    }
+  };
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/planner/${id}`)

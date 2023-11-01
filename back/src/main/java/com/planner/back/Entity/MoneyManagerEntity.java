@@ -23,4 +23,5 @@ public class MoneyManagerEntity {
     private int outMoney;
     private String place;
     private int headCount;
+    private boolean del;
 }
