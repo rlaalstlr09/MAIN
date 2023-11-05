@@ -58,7 +58,7 @@ export default function MWritePage() {
             autoComplete="off"
             onSubmit={handleSubmit}
         >
-            <h4>계획표 작성</h4>
+            <h4>예산관리 작성</h4>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={e=> setOutMoney(e.target.value)}/><br/>

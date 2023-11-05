@@ -17,7 +17,7 @@ import java.sql.Date;
 public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int pNum;
     private String title;
     private String email;

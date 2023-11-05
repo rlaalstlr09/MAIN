@@ -42,7 +42,7 @@ export default function MoneyPage() {
 
     return (
         <div className="App"> 
-        <div style={{ height: 400, width: '100%' }}> 
+        <div style={{ height: '60%', width: '60%' }}> 
             <h4>예산관리</h4><br/>
             <TableContainer>
                 <Table>

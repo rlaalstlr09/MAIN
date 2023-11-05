@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST},allowCredentials = "true")
 public class MoneyController {
     private final MoneyManagerRepository repository;
     private final SessionService sessionService;
@@ -42,5 +42,38 @@ public class MoneyController {
 
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("MoneyManager not found with id " + id));
+    }
+
+    @PutMapping("/api/money/{id}")
+    public MoneyManagerEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody MoneyManagerEntity newMoneyManager) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        return repository.findById(id)
+
+                .map(moneyManager -> {
+                    if(!moneyManager.getEmail().equals(email)) {
+                        throw new RuntimeException("권한이 없습니다.");
+                    }
+                    moneyManager.setDate(newMoneyManager.getDate());
+                    moneyManager.setPlace(newMoneyManager.getPlace());
+                    moneyManager.setInMoney(newMoneyManager.getInMoney());
+                    moneyManager.setOutMoney(newMoneyManager.getOutMoney());
+                    moneyManager.setHeadCount(newMoneyManager.getHeadCount());
+                    return repository.save(moneyManager);
+                })
+                .orElseGet(() -> {
+                    newMoneyManager.setId(id);
+                    return repository.save(newMoneyManager);
+                });
+    }
+
+    @DeleteMapping("/api/money/{id}")
+    public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        MoneyManagerEntity moneyManager = repository.findById(id).orElseThrow(() -> new RuntimeException("예산관리가 존재하지 않습니다."));
+        if(!moneyManager.getEmail().equals(email)) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+
+        repository.deleteById(id);
     }
 }

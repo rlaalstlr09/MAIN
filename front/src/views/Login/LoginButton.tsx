@@ -3,7 +3,7 @@ import axios from 'axios';
 
 interface User {
   email: string;
-  // 필요에 따라 User 인터페이스에 다른 필드를 추가할 수 있습니다.
+ 
 }
 
 export default function LoginButton() {
@@ -15,9 +15,13 @@ export default function LoginButton() {
       .catch(error => console.error('There was an error!', error));
   }, []);
 
-  const handleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
-  };
-
-  return user ? <div>{user.email}</div> : <button onClick={handleLogin}>Login with Google</button>;
+  return user ? (
+    <div>{user.email}</div>
+  ) : (<div>
+    로그인이 필요합니다.<br/>
+    <a href="http://localhost:8080/oauth2/authorization/google">
+      <img src="GoogleLogin.png" alt="Login with Google" />
+    </a>
+    </div>
+  );
 }

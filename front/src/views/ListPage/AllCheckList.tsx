@@ -61,7 +61,7 @@ export default function CheckPage() {
 
     return (
         <div className="App">
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{ height: '60%', width: '60%' }}>
                 <h4>체크리스트</h4><br/>
                 <DataGrid
                     rows={checkList}

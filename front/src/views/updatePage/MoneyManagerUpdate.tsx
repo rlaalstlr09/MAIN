@@ -2,10 +2,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export default function MWritePage() {
+export default function MUpdatePage() {
+
+    const { id } = useParams();
 
     const [date, setDate] = useState('');
     const [place, setPlace] = useState('');
@@ -13,11 +15,24 @@ export default function MWritePage() {
     const [outMoney, setOutMoney] = useState('');
     const [headCount, setHeadCount] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/money/${id}`, { withCredentials: true })
+            .then(response => {
+                setDate(response.data.date);
+                setPlace(response.data.place);
+                setInMoney(response.data.inMoney);
+                setOutMoney(response.data.outMoney);
+                setHeadCount(response.data.headCount);
+            })
+            .catch(error => console.error('There was an error!', error));
+    }, [id]);
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:8080/api/money', {
+            const response = await axios.put(`http://localhost:8080/api/money/${id}`, {
               date,
               place,
               inMoney,
@@ -58,7 +73,7 @@ export default function MWritePage() {
             autoComplete="off"
             onSubmit={handleSubmit}
         >
-            <h4>계획표 작성</h4>
+            <h4>예산관리 수정</h4>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={e=> setOutMoney(e.target.value)}/><br/>

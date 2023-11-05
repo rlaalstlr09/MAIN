@@ -2,10 +2,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export default function PWritePage() {
+export default function PUpdatePage() {
+
+    const { id } = useParams();
 
     const [title, setTitle] = useState('');
     const [todo, setTodo] = useState('');
@@ -15,11 +17,27 @@ export default function PWritePage() {
     const [place, setPlace] = useState('');
     const [memo, setMemo] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/planner/${id}`, { withCredentials: true })
+            .then(response => {
+                setTitle(response.data.title);
+                setTodo(response.data.todo);
+                setDate(response.data.date);
+                setStart_time(response.data.start_time);
+                setEnd_time(response.data.end_time);
+                setPlace(response.data.place);
+                setMemo(response.data.memo);
+                
+            })
+            .catch(error => console.error('There was an error!', error));
+    }, [id]);
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:8080/api/planner', {
+            const response = await axios.put(`http://localhost:8080/api/planner/${id}`, {
               title,
               todo,
               date,
@@ -63,7 +81,7 @@ export default function PWritePage() {
             autoComplete="off"
             onSubmit={handleSubmit}
         >
-            <h4>계획표 작성</h4>
+            <h4>계획표 수정</h4>
             <TextField fullWidth label="제목" id="_title" value={title} onChange={e=> setTitle(e.target.value)} /><br/>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>

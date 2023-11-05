@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class CheckListEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String email;
     private String todo;
     private String place;

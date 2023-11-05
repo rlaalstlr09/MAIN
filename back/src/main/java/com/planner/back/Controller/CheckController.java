@@ -24,7 +24,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST},allowCredentials = "true")
 public class CheckController {
     private final CheckListRepository repository;
     private final SessionService sessionService;
@@ -32,7 +32,7 @@ public class CheckController {
 
     @PostMapping("/api/check")
     public ResponseEntity<?> createCheckList(HttpServletRequest request, @RequestBody CheckListEntity check){
-        System.out.println("User info in session: " +  request.getSession().getAttribute("email"));
+
         try {
             check.setEmail(sessionService.getCurrentUserEmail(request));
             repository.save(check);
@@ -53,5 +53,35 @@ public class CheckController {
 
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Check List not found with id " + id));
+    }
+
+    @PutMapping("/api/check/{id}")
+    public CheckListEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody CheckListEntity newCheckList) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        return repository.findById(id)
+
+                .map(checkList -> {
+                    if(!checkList.getEmail().equals(email)) {
+                        throw new RuntimeException("권한이 없습니다.");
+                    }
+                    checkList.setTodo(newCheckList.getTodo());
+                    checkList.setPlace(newCheckList.getPlace());
+                    return repository.save(checkList);
+                })
+                .orElseGet(() -> {
+                    newCheckList.setId(id);
+                    return repository.save(newCheckList);
+                });
+    }
+
+    @DeleteMapping("/api/check/{id}")
+    public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        CheckListEntity checkList = repository.findById(id).orElseThrow(() -> new RuntimeException("체크리스트가 존재하지 않습니다."));
+        if(!checkList.getEmail().equals(email)) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+
+        repository.deleteById(id);
     }
 }

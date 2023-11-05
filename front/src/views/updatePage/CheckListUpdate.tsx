@@ -58,7 +58,7 @@ export default function CUpdatePage() {
             autoComplete="off"
             onSubmit={handleSubmit}
         >
-            <h4>계획표 작성</h4><br/>
+            <h4>체크리스트 수정</h4><br/>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <Button type = "submit" variant="contained" className="write">수정</Button>

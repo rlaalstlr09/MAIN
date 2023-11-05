@@ -16,7 +16,7 @@ import jakarta.persistence.*;
 public class MoneyManagerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String date;
     private String email;
     private int inMoney;

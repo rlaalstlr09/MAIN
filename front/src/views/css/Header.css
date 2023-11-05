@@ -1,0 +1,12 @@
+.logo {
+    margin-left:10px;
+    margin-top: 10px;
+    width: 65px;
+    height: 65px;
+  }
+  
+  .tab-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

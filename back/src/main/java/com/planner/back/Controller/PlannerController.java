@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST},allowCredentials = "true")
 public class PlannerController {
     @Autowired
     private final PlannerRepository repository;
@@ -46,5 +46,39 @@ public class PlannerController {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Planner not found with id " + id));
     }
+    @PutMapping("/api/planner/{id}")
+    public PlannerEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody PlannerEntity newPlanner) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        return repository.findById(id)
 
+                .map(Planner -> {
+                    if(!Planner.getEmail().equals(email)) {
+                        throw new RuntimeException("권한이 없습니다.");
+                    }
+                    Planner.setDate(newPlanner.getDate());
+                    Planner.setPlace(newPlanner.getPlace());
+                    Planner.setTitle(newPlanner.getTitle());
+                    Planner.setTodo(newPlanner.getTodo());
+                    Planner.setStart_time(newPlanner.getStart_time());
+                    Planner.setEnd_time(newPlanner.getEnd_time());
+                    Planner.setMemo(newPlanner.getMemo());
+
+                    return repository.save(Planner);
+                })
+                .orElseGet(() -> {
+                    newPlanner.setId(id);
+                    return repository.save(newPlanner);
+                });
+    }
+
+    @DeleteMapping("/api/planner/{id}")
+    public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        PlannerEntity planner = repository.findById(id).orElseThrow(() -> new RuntimeException("계획표가 존재하지 않습니다."));
+        if(!planner.getEmail().equals(email)) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+
+        repository.deleteById(id);
+    }
 }

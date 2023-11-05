@@ -15,6 +15,8 @@ import React from 'react';
 import LandingPage from './views/viewPage/MapLanding';
 import Header from './views/fragments/Header'
 import CUpdatePage from './views/updatePage/CheckListUpdate';
+import MUpdatePage from './views/updatePage/MoneyManagerUpdate';
+import PUpdatePage from './views/updatePage/PlannerUpdate';
 
 export default function App() {
   
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="/money/write" element={<MWritePage />} />
             <Route path="/" element={<LoginBtnPage />} /> 
             <Route path="/check/update/:id" element={<CUpdatePage />} />
+            <Route path="/money/update/:id" element={<MUpdatePage />} />
+            <Route path="/calendar/planner/update/:id" element={<PUpdatePage />} />
           </Routes>
         
       
