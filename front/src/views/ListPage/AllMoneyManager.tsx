@@ -21,6 +21,8 @@ export default function MoneyPage() {
         navigate(`/money/update/${id}`);
     };
 
+    
+
     const handleDelete = async (id: number) => {
         try {
             await axios.delete(`http://localhost:8080/api/money/${id}`, { withCredentials: true });
@@ -29,6 +31,19 @@ export default function MoneyPage() {
             setMoneyManager(response.data);
         } catch (error) {
             console.error('삭제 에러', error);
+        }
+    };
+
+    const handleWrite = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
+            if (response.data.email) {
+                navigate('/check/write');
+            } else {
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error('There was an error!', error);
         }
     };
 
@@ -77,7 +92,7 @@ export default function MoneyPage() {
             </TableContainer>
             <div>
             <br/>
-            <Button variant="contained" className="write" component={Link} to="/money/write">예산관리 작성</Button>
+            <Button variant="contained" className="write" onClick={handleWrite}>예산관리 작성</Button>
         </div>
         </div>
         </div>

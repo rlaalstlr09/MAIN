@@ -31,6 +31,19 @@ export default function CheckPage() {
         }
     };
 
+    const handleWrite = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
+            if (response.data.email) {
+                navigate('/check/write');
+            } else {
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
+    
     const columns: GridColDef[] = [
       { field: 'id', headerName: '#', width: 70 },
       { field: 'todo', headerName: 'Todo', width: 130 },
@@ -75,7 +88,7 @@ export default function CheckPage() {
                     checkboxSelection
                 />
                 <div className="Button">
-                <Button variant="contained" className="write" component={Link} to="/check/write">체크리스트 작성</Button>  
+                <Button variant="contained" className="write" onClick = {handleWrite}>체크리스트 작성</Button>  
              </div>
             </div>
             

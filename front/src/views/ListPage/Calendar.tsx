@@ -20,6 +20,19 @@ export default function CalendarPage() {
     navigate(`/calendar/planner/${info.event.id}`);
   }
 
+  const handleWrite = async () => {
+    try {
+        const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
+        if (response.data.email) {
+            navigate('/check/write');
+        } else {
+            navigate('/login');
+        }
+    } catch (error) {
+        console.error('There was an error!', error);
+    }
+};
+
   useEffect(() => {
     axios.get(`http://localhost:8080/api/planner`,{
       withCredentials: true
@@ -45,7 +58,7 @@ export default function CalendarPage() {
         />
     </div>
     <div className="Button">
-    <Button variant="contained" className="write" component={Link} to="/calendar/planner/write">계획표 작성</Button>
+    <Button variant="contained" className="write" onClick = {handleWrite}>계획표 작성</Button>
     
   </div>
 </div>
