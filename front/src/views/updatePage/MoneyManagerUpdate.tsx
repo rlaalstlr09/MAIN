@@ -16,6 +16,20 @@ export default function MUpdatePage() {
     const [headCount, setHeadCount] = useState('');
     const navigate = useNavigate();
 
+    function handleIntegerInput(setState: React.Dispatch<React.SetStateAction<string>>) {
+        return (event: React.ChangeEvent<HTMLInputElement>) => {
+          const newValue = event.target.value;
+      
+          // 입력된 값이 정수인지 확인
+          if (!isNaN(Number(newValue)) && Number.isInteger(Number(newValue))) {
+            setState(newValue);
+          } else {
+            // 정수가 아닌 경우 경고를 표시하거나 무시할 수 있습니다.
+            console.warn('정수만 입력 가능합니다.');
+          }
+        };
+      }
+
     useEffect(() => {
         axios.get(`http://localhost:8080/api/money/${id}`, { withCredentials: true })
             .then(response => {
@@ -76,11 +90,11 @@ export default function MUpdatePage() {
             <h4>예산관리 수정</h4>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={e=> setOutMoney(e.target.value)}/><br/>
-            <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={e=> setInMoney(e.target.value)}/><br/>
-            <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={e=> setHeadCount(e.target.value)}/><br/>
-            <Button type = "submit"variant="contained" className="write">수정</Button>
-            <Button type = "reset" variant="contained" className="reset">취소</Button>
+            <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={handleIntegerInput(setInMoney)}/><br/>
+            <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={handleIntegerInput(setHeadCount)}/><br/>
+            <Button type = "submit" variant="contained" >수정</Button>
+            <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
         </Box>
     );
   }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
+import WriteButton from './WriteButton';
 
 interface CheckList {
     id: number;
@@ -15,7 +16,7 @@ interface CheckList {
 export default function CheckPage() {
     const [checkList, setCheckList] = useState<CheckList[]>([]);
     const navigate = useNavigate();
-
+    
     const handleUpdate = async (id: number) => {
       navigate(`/check/update/${id}`);
     };
@@ -31,10 +32,10 @@ export default function CheckPage() {
         }
     };
 
-    const handleWrite = async () => {
+    const handleWrite = async () => {       //나중에 삭제
         try {
             const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
-            if (response.data.email) {
+            if (response.status === 200) {
                 navigate('/check/write');
             } else {
                 navigate('/login');
@@ -88,7 +89,7 @@ export default function CheckPage() {
                     checkboxSelection
                 />
                 <div className="Button">
-                <Button variant="contained" className="write" onClick = {handleWrite}>체크리스트 작성</Button>  
+                <WriteButton redirectPath='/check/write'/>
              </div>
             </div>
             

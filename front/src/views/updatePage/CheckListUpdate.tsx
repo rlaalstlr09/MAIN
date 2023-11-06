@@ -14,6 +14,20 @@ export default function CUpdatePage() {
     const [place, setPlace] = useState('');
     const [todo, setTodo] = useState('');
 
+    const [value, setValue] = useState('');
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = event.target.value;
+  
+      // 입력된 값이 숫자인지 확인
+      if (!isNaN(Number(newValue))) {
+        setValue(newValue);
+      } else {
+        // 숫자가 아닌 경우 경고를 표시하거나 무시할 수 있습니다.
+        console.warn('숫자만 입력 가능합니다.');
+      }
+    };
+
     // 페이지가 로드될 때 체크리스트 항목을 조회합니다.
     useEffect(() => {
         axios.get(`http://localhost:8080/api/check/${id}`, { withCredentials: true })
@@ -61,8 +75,8 @@ export default function CUpdatePage() {
             <h4>체크리스트 수정</h4><br/>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <Button type = "submit" variant="contained" className="write">수정</Button>
-            <Button type = "reset" variant="contained" className="reset">취소</Button>
+            <Button type = "submit" variant="contained" >수정</Button>
+            <Button variant="contained" onClick={() => navigate('/check')}>취소</Button>
         </Box>
     );
   }

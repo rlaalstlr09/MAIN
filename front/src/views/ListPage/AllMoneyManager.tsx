@@ -3,6 +3,7 @@ import '../css/MoneyManager.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
+import WriteButton from './WriteButton';
 
 interface MoneyManager {
     id: number;
@@ -34,7 +35,7 @@ export default function MoneyPage() {
         }
     };
 
-    const handleWrite = async () => {
+    const handleWrite = async () => {        //나중에 삭제
         try {
             const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
             if (response.data.email) {
@@ -92,7 +93,7 @@ export default function MoneyPage() {
             </TableContainer>
             <div>
             <br/>
-            <Button variant="contained" className="write" onClick={handleWrite}>예산관리 작성</Button>
+            <WriteButton redirectPath='/money/write'/>
         </div>
         </div>
         </div>

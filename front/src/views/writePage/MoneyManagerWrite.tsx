@@ -13,6 +13,21 @@ export default function MWritePage() {
     const [outMoney, setOutMoney] = useState('');
     const [headCount, setHeadCount] = useState('');
     const navigate = useNavigate();
+
+    function handleIntegerInput(setState: React.Dispatch<React.SetStateAction<string>>) {
+        return (event: React.ChangeEvent<HTMLInputElement>) => {
+          const newValue = event.target.value;
+      
+          // 입력된 값이 정수인지 확인
+          if (!isNaN(Number(newValue)) && Number.isInteger(Number(newValue))) {
+            setState(newValue);
+          } else {
+            // 정수가 아닌 경우 경고를 표시하거나 무시할 수 있습니다.
+            console.warn('정수만 입력 가능합니다.');
+          }
+        };
+      }
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
@@ -61,11 +76,11 @@ export default function MWritePage() {
             <h4>예산관리 작성</h4>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={e=> setOutMoney(e.target.value)}/><br/>
-            <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={e=> setInMoney(e.target.value)}/><br/>
-            <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={e=> setHeadCount(e.target.value)}/><br/>
-            <Button type = "submit"variant="contained" className="write">저장</Button>
-            <input type="reset" value="취소"></input>
+            <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <Button type = "submit" variant="contained" >저장</Button>
+            <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
         </Box>
     );
   }

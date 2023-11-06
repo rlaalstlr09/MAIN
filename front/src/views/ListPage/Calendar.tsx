@@ -5,6 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '../css/Calendar.css';
 import { Button } from '@mui/material';
+import WriteButton from './WriteButton';
 
 interface Planner {
   id: number;
@@ -20,7 +21,7 @@ export default function CalendarPage() {
     navigate(`/calendar/planner/${info.event.id}`);
   }
 
-  const handleWrite = async () => {
+  const handleWrite = async () => {    //나중에 삭제
     try {
         const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
         if (response.data.email) {
@@ -58,7 +59,7 @@ export default function CalendarPage() {
         />
     </div>
     <div className="Button">
-    <Button variant="contained" className="write" onClick = {handleWrite}>계획표 작성</Button>
+    <WriteButton redirectPath='/calendar/planner/write'/>
     
   </div>
 </div>

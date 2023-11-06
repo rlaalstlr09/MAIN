@@ -8,7 +8,7 @@ import CheckPage from './views/ListPage/AllCheckList'
 import MWritePage from './views/writePage/MoneyManagerWrite'
 import MoneyPage from './views/ListPage/AllMoneyManager'
 import PlannerPage from './views/viewPage/Planner'
-import LoginBtnPage from './views/Login/LoginButton'
+import LoginBtnPage from './views/Login/GoogleLoginButton'
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
 import React from 'react';
@@ -17,6 +17,8 @@ import Header from './views/fragments/Header'
 import CUpdatePage from './views/updatePage/CheckListUpdate';
 import MUpdatePage from './views/updatePage/MoneyManagerUpdate';
 import PUpdatePage from './views/updatePage/PlannerUpdate';
+import GoogleLogin from 'react-google-onetap';
+import GoogleLoginButton from './views/Login/GoogleLoginButton';
 
 export default function App() {
   
@@ -36,7 +38,6 @@ export default function App() {
             <Route path="/check/write" element={<CWritePage />} />
             <Route path="/money" element={<MoneyPage />} />
             <Route path="/money/write" element={<MWritePage />} />
-            <Route path="/" element={<LoginBtnPage />} /> 
             <Route path="/check/update/:id" element={<CUpdatePage />} />
             <Route path="/money/update/:id" element={<MUpdatePage />} />
             <Route path="/calendar/planner/update/:id" element={<PUpdatePage />} />

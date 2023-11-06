@@ -86,8 +86,8 @@ export default function PWritePage() {
           </Grid><br/>
           <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
           <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/><br/>
-          <Button type = "submit"variant="contained" className="write">저장</Button>
-          <Button type = "reset" variant="contained" className="reset">취소</Button>
+          <Button type = "submit"variant="contained" >저장</Button>
+          <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
         </div>
       );
     }

@@ -88,8 +88,8 @@ export default function PUpdatePage() {
             <TextField fullWidth label="시작 시간" id="_start_time" value={start_time} onChange={e=> setStart_time(e.target.value)}/> ~ <TextField fullWidth label="끝 시간" id="_end_time" value={end_time} onChange={e=> setEnd_time(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/><br/>
-            <Button type = "submit"variant="contained" className="write">수정</Button>
-            <Button type = "reset" variant="contained" className="reset">취소</Button>
+            <Button type = "submit" variant="contained" >수정</Button>
+            <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
         </Box>
     );
   }

@@ -53,8 +53,8 @@ export default function CWritePage() {
             <h4>체크리스트 작성</h4><br/>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <Button type = "submit" variant="contained" className="write">저장</Button>
-            <Button type = "reset" variant="contained" className="reset">취소</Button>
+            <Button type = "submit" variant="contained" >저장</Button>
+            <Button variant="contained" onClick={() => navigate('/check')}>취소</Button>
         </Box>
     );
   }
