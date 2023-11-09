@@ -3,7 +3,8 @@ import '../css/MoneyManager.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
-import WriteButton from './WriteButton';
+import WriteButton from '../component/WriteButton';
+import DeleteButton from '../component/DeleteButton';
 
 interface MoneyManager {
     id: number;
@@ -48,13 +49,19 @@ export default function MoneyPage() {
         }
     };
 
+    const getMoneyManager = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/check', { withCredentials: true });
+            setMoneyManager(response.data);
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/money`, { withCredentials: true })
-            .then(response => {
-                setMoneyManager(response.data);
-            })
-            .catch(error => console.error('There was an error!', error));
+        getMoneyManager();
     }, []);
+
 
     return (
         <div className="App"> 
@@ -84,7 +91,7 @@ export default function MoneyPage() {
                                 <TableCell>{item.headCount}</TableCell>
                                 <TableCell>
                                     <Button onClick={() => handleUpdate(item.id)}>수정</Button>
-                                    <Button onClick={() => handleDelete(item.id)}>삭제</Button>
+                                    <DeleteButton id={item.id} getData={getMoneyManager} path="check" />
                                 </TableCell>
                             </TableRow>
                         ))}

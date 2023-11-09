@@ -37,7 +37,7 @@ const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
 
     return(
         <div>
-            <Button onClick={handleWriteButton}>작성</Button>
+            <Button variant="contained" onClick={handleWriteButton}>작성</Button>
             <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
         </div>
     )

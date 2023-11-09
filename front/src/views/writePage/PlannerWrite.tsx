@@ -5,6 +5,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 
 export default function PWritePage() {
 
@@ -53,17 +54,22 @@ export default function PWritePage() {
          }
        };
        return (
-        <div>
+        <Box 
+        component="form"
+        sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}>
+          <Stack spacing={2}>
           <h4>계획표 작성</h4>
-          <TextField fullWidth label="제목" id="_title" value={title} onChange={e=> setTitle(e.target.value)} /><br/>
-          <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
+          <TextField fullWidth label="제목" id="_title" value={title} onChange={e=> setTitle(e.target.value)} />
+          <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/>
           <TextField fullWidth label="날짜" id="_date" type="date" value={date} onChange={e=> setDate(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
-          /><br/>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
+          />
+         <Stack direction="row" spacing={2}>
               <TextField fullWidth label="시작 시간" id="_start_time" type="time" value={start_time} onChange={e=> setStart_time(e.target.value)}
                 InputLabelProps={{
                   shrink: true,
@@ -72,8 +78,7 @@ export default function PWritePage() {
                   step: 300, // 5 min
                 }}
               />
-            </Grid>
-            <Grid item xs={6}>
+            
               <TextField fullWidth label="끝 시간" id="_end_time" type="time" value={end_time} onChange={e=> setEnd_time(e.target.value)}
                 InputLabelProps={{
                   shrink: true,
@@ -82,12 +87,13 @@ export default function PWritePage() {
                   step: 300, // 5 min
                 }}
               />
-            </Grid>
-          </Grid><br/>
-          <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-          <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/><br/>
-          <Button type = "submit"variant="contained" >저장</Button>
-          <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
-        </div>
+           </Stack>
+          <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/>
+          <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/>
+          
+        <div><Button type = "submit"variant="contained" >저장</Button>
+        <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button></div>
+        </Stack>
+        </Box>
       );
     }

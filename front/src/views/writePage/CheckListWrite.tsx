@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
 
 
 export default function CWritePage() {
@@ -42,19 +43,21 @@ export default function CWritePage() {
      
         <Box
             component="form"
-            sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            
-            }}
+            sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
         >
             <h4>체크리스트 작성</h4><br/>
+            <Stack spacing={2}>
+            
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
+            <div>
             <Button type = "submit" variant="contained" >저장</Button>
             <Button variant="contained" onClick={() => navigate('/check')}>취소</Button>
+            </div>
+            </Stack>
         </Box>
     );
   }

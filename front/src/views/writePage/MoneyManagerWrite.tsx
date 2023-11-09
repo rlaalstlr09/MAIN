@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
 
 export default function MWritePage() {
 
@@ -65,22 +66,23 @@ export default function MWritePage() {
      
         <Box
             component="form"
-            sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            
-            }}
+            sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
         >
             <h4>예산관리 작성</h4>
+            <Stack spacing={2}>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
             <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
             <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <div>
             <Button type = "submit" variant="contained" >저장</Button>
             <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
+            </div>
+            </Stack>
         </Box>
     );
   }

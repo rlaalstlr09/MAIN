@@ -5,7 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '../css/Calendar.css';
 import { Button } from '@mui/material';
-import WriteButton from './WriteButton';
+import WriteButton from '../component/WriteButton';
 
 interface Planner {
   id: number;

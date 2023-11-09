@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
-import WriteButton from './WriteButton';
+import WriteButton from '../component/WriteButton';
+import DeleteButton from '../component/DeleteButton';
 
 interface CheckList {
     id: number;
@@ -16,12 +17,25 @@ interface CheckList {
 export default function CheckPage() {
     const [checkList, setCheckList] = useState<CheckList[]>([]);
     const navigate = useNavigate();
-    
+
+    const getCheckList = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/check', { withCredentials: true });
+            setCheckList(response.data);
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
+
+    useEffect(() => {
+        getCheckList();
+    }, []);
+
     const handleUpdate = async (id: number) => {
       navigate(`/check/update/${id}`);
     };
 
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (id: number) => {        //나중에 삭제
         try {
             await axios.delete(`http://localhost:8080/api/check/${id}`, { withCredentials: true });
             alert('삭제 성공');
@@ -58,21 +72,14 @@ export default function CheckPage() {
               return (
                   <>
                        <Button onClick={() => handleUpdate(id)}>수정</Button>
-                       <Button onClick={() => handleDelete(id)}>삭제</Button>
+                       <DeleteButton id={id} getData={getCheckList} path="check" />
                   </>
               );
           },
       },
   ];
 
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/check`, { withCredentials: true })
-            .then(response => {
-                setCheckList(response.data);
-            })
-            .catch(error => console.error('There was an error!', error));
-    }, []);
-
+    
     return (
         <div className="App">
             <div style={{ height: '60%', width: '60%' }}>

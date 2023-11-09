@@ -49,7 +49,7 @@ export default function Header() {
     }, []);
 
 return(
-<Box sx={{ width: '100%', typography: 'body1' }}>
+<Box sx={{  width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -62,19 +62,20 @@ return(
                                     <Tab label="계획표" component={Link} to="/calendar" />
                                     <Tab label="체크리스트" component={Link} to="/check" />
                                     <Tab label="예산관리" component={Link} to="/money" />
-                                    
+                                    <Box sx={{marginRight:'-100%'}}>
                                     {isLogin ? (
                                         <>
                                         <LogoutButton onLogout={handleLogout} />
-                                        <p>{name} 님 환영합니다.</p> 
+                                        <span>{name} 님 환영합니다. </span>
                                         </>
+                                         
                                     ): (
-                                        <Box>
+                                        <>
                                         <Button variant="contained" onClick={ LoginHandler}>로그인</Button>
                                         <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-                                        </Box>  
+                                        </>
                                     )}
-                                    
+                                    </Box> 
 
                                 </Box>
                             </Box>
