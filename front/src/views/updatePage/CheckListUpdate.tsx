@@ -64,19 +64,14 @@ export default function CUpdatePage() {
     return (
      
         <Box
-            component="form"
-            sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-        >
+      component="form"
+      sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+  >
             <h4>체크리스트 수정</h4><br/>
             <Stack spacing={2}>
-
-            
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <div>

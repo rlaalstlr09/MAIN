@@ -6,6 +6,7 @@ import WriteButton from '../component/WriteButton';
 import DeleteButton from '../component/DeleteButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import './css/money.css';
 
 interface MoneyManager {
     id: number;

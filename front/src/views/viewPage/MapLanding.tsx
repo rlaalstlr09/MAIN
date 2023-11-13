@@ -26,9 +26,12 @@ const submitKeyword = (e: { preventDefault: () => void; }) => {
 }
 
 // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
-const valueChecker = () => {
+const valueChecker = (e: { preventDefault: () => void; }) => {
+  e.preventDefault();
   if (Value === "") {
     alert ("검색어를 입력해주세요.")
+  }  else {
+    submitKeyword(e);
   }
 }
 
@@ -39,9 +42,9 @@ return (
         <form className="search-form" onSubmit={ submitKeyword }>
           <label htmlFor="place" className="form__label">
             <TextField id='movie-title' className='form_input' name="place" onChange={keywordChange } placeholder="검색어를 입력해주세요. (ex: 강남 맛집)" required />
-            <div className="btn-box">
-              <Button variant="contained" className='btn from__submit' onClick={ valueChecker}>검색</Button>
-            </div>
+            
+              <Button variant="contained" className='btn' onClick={ valueChecker}>검색</Button>
+            
           </label>
         </form>
       </div>

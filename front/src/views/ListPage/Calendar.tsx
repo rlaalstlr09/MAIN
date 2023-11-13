@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import '../css/Calendar.css';
 import WriteButton from '../component/WriteButton';
+import './css/calendar.css';
 
 interface Planner {
   id: number;
@@ -31,11 +31,12 @@ export default function CalendarPage() {
   }, []);
 
   return (
-    <div className="main">
+    <div className="App">
       <div className='calendar'>
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
+          locale='ko' 
           events={planners.map(planner => ({
             id: String(planner.id),
             title: planner.title,

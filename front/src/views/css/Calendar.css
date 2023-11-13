@@ -4,16 +4,3 @@
     height: 100vh;
   }
   
-.calendar {
-    width: 60%;
-    height: 60%;
-  }
-
-.Button{
-  display: flex;
-  margin-left:10px;
-}
-.write{
-  width:130px;
-  height: 50px;
-}

@@ -1,8 +1,8 @@
-import { TabContext, TabList } from '@mui/lab';
-import { Box, Button, Tab } from '@mui/material';
+
+import { Button } from '@mui/material';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './css/Main.css'
+import { useNavigate } from 'react-router-dom';
+import css from './css/Main.css';
 
 export default function MainPage() {
     const [value, setValue] = React.useState('1');
@@ -11,13 +11,55 @@ export default function MainPage() {
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-    return (
-        <div className="container">
-        <Button className="button" variant="contained" onClick={() => navigate('/map')}>지도</Button>
-        <Button className="button" variant="contained" onClick={() => navigate('/calendar')}>계획표</Button>
-        <Button className="button" variant="contained" onClick={() => navigate('/check')}>체크리스트</Button>
-        <Button className="button" variant="contained" onClick={() => navigate('/money')}>예산관리</Button>
+  return (
+    <div className={css.App}>
+      <div className='info'>
+        <h1>PlanIt</h1>
+        <b>여행계획을 편하게 작성하고 관리하세요!</b>
+      </div>
+      <div className='container'>
+      <div className="row">
+      <div className="vertical-divider" />
+
+        <Button variant="outlined" className="button" onClick={() => navigate('/map')}>
+          <div className='button-content'>
+          <div><b>지도</b></div>
+          <hr className='btn-hr'/>
+          <small>가고싶은 여행지 / 숙소 / 식당을 찾아보세요.</small>
+          </div>
+
+          </Button>
+        <Button variant="outlined" className="button" onClick={() => navigate('/calendar')}>
+          
+          <div className='button-content'>
+          <div><b>계획표</b></div>
+          <hr className='btn-hr'/>
+          <small></small>
+          </div>
+
+        </Button>
+     </div>
+      <hr className="horizontal-divider" />
+      <div className="row">
+        <Button variant="outlined" className="button" onClick={() => navigate('/check')}>
+        <div className='button-content'>
+          <div><b>체크리스트</b></div>
+          <hr className='btn-hr'/>
+          <small></small>
+          </div>
+        </Button>
+        
+        <Button variant="outlined" className="button" onClick={() => navigate('/money')}>
+        <div className='button-content'>
+          <div><b>예산관리</b></div>
+          <hr className='btn-hr'/>
+          <small></small>
+          </div>
+        </Button>
     </div>
-    );
-};
+    </div>
+    </div>
+  );
+
+}
 

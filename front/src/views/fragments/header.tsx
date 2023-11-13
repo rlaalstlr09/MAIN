@@ -3,9 +3,13 @@ import { Box, Button, Tab } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "../Login/LogoutButton";
-import '../css/Header.css'
+import './css/Header.css'
 import axios from "axios";
 import GoogleLoginModal from "../Login/GoogleLoginButton";
+import MapTwoToneIcon from '@mui/icons-material/MapTwoTone';
+import EditCalendarTwoToneIcon from '@mui/icons-material/EditCalendarTwoTone';
+import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
+import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone';
 
 export default function Header() {
     const [value, setValue] = React.useState('1');
@@ -54,17 +58,17 @@ return(
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Box className="tab-list">
+                                <Box className="tab-list" sx={{ '& > *': { mr: 10 } }}>
+                                <Box sx={{ mr: 3 }}>
                                     <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
                                     <img className="logo" src="Logo.png" alt="logo" />
                                     </Link>
-                                    <Tab label="지도" component={Link} to="/map" />
-                                    <Tab label="계획표" component={Link} to="/calendar" />
-                                    <Tab label="체크리스트" component={Link} to="/check" />
-                                    <Tab label="예산관리" component={Link} to="/money" />
-                                    
-                                    
-
+                                    </Box>
+                                    <Tab icon={<MapTwoToneIcon />} label="지도" component={Link} to="/map" />
+                                    <Tab icon={<EditCalendarTwoToneIcon/>}label="계획표" component={Link} to="/calendar" />
+                                    <Tab icon={<CheckBoxTwoToneIcon/>}label="체크리스트" component={Link} to="/check" />
+                                    <Tab icon={<LocalAtmTwoToneIcon/>}label="예산관리" component={Link} to="/money" />
+                               
                                 </Box>
                             </Box>
                             <Box sx={{width:'100px', marginLeft:'60%', marginTop:'20px'}}>

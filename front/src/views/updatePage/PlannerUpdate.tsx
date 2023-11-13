@@ -4,92 +4,115 @@ import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
-export default function PUpdatePage() {
-
-    const { id } = useParams();
-
-    const [title, setTitle] = useState('');
-    const [todo, setTodo] = useState('');
-    const [date, setDate] = useState('');
-    const [start_time, setStart_time] = useState('');
-    const [end_time, setEnd_time] = useState('');
-    const [place, setPlace] = useState('');
-    const [memo, setMemo] = useState('');
+interface Plan {
+    title: string;
+    todo: string;
+    date: string;
+    start_time: string;
+    end_time: string;
+    place: string;
+    memo: string;
+  }
+  
+  const PUpdatePage: React.FC = () => {
+    const [plannerTitle, setPlannerTitle] = useState<string>("");
+    const [plannerDate, setPlannerDate] = useState<string>("");
+    const [plans, setPlans] = useState<Plan[]>([]);
     const navigate = useNavigate();
+    const { id: plannerId } = useParams();
 
+  
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/planner/${id}`, { withCredentials: true })
-            .then(response => {
-                setTitle(response.data.title);
-                setTodo(response.data.todo);
-                setDate(response.data.date);
-                setStart_time(response.data.start_time);
-                setEnd_time(response.data.end_time);
-                setPlace(response.data.place);
-                setMemo(response.data.memo);
-                
-            })
-            .catch(error => console.error('There was an error!', error));
-    }, [id]);
-
+      const fetchPlanner = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/api/planner/${plannerId}`, { withCredentials: true });
+          setPlannerTitle(response.data.title);
+          setPlannerDate(response.data.date);
+          setPlans(response.data.plans);
+        } catch (error) {
+          console.error('계획표 불러오기 에러', error);
+        }
+      };
+    
+      fetchPlanner();
+    },  [plannerId]);
+  
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
+      
         try {
-            const response = await axios.put(`http://localhost:8080/api/planner/${id}`, {
-              title,
-              todo,
-              date,
-              start_time,
-              end_time,
-              place,
-              memo
-            },{
-                withCredentials: true
-            });
-
-             if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우
-                alert('수정되었습니다.'); // 서버로부터 받은 메시지를 alert 창으로 출력
-                navigate(`/calendar`);
-      }
-            
-            setTitle('');
-            setTodo('');
-            setDate('');
-            setStart_time('');
-            setEnd_time('');
-            setPlace('');
-            setMemo('');
-
-        } catch (error) {
+          // Save the planner and the plans
+          const planner = { title: plannerTitle, date: plannerDate, plans };
+          await axios.put(`http://localhost:8080/api/planner/${plannerId}`, planner, { withCredentials: true });
+      
+          alert('수정 되었습니다.');
+          navigate(`/calendar`);
+      
+          setPlans([{ title: "", todo: "",date:"", start_time: "", end_time: "", place: "", memo: "" }]);
+          setPlannerTitle("");
+          setPlannerDate("");
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
             console.error('계획표 수정 에러', error);
-            if ((error as AxiosError).response && (error as AxiosError).response?.data) { 
-                alert((error as AxiosError).response?.data); // 에러 메시지를 alert 창으로 출력
+            if (error.response?.data) {
+              alert(error.response.data);
             }
-         }
-       };
+          }
+        }
+      };
+
+      const handleChangePlan = (index: number, field: keyof Plan, value: string) => {
+        const newPlans = [...plans];
+        newPlans[index][field] = value;
+        setPlans(newPlans);
+      };
+    
+      const handleRemovePlan = (index: number) => {
+        const newPlans = [...plans];
+        newPlans.splice(index, 1);
+        setPlans(newPlans);
+      };
+
+      const handleAddPlan = () => {
+        setPlans([
+          ...plans,
+          { title: "", todo: "",date:"", start_time: "", end_time: "", place: "", memo: "" }
+        ]);
+      };
+
     return (
      
         <Box
-            component="form"
-            sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-        >
+      component="form"
+      sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+  >
+           
             <h4>계획표 수정</h4>
-            <TextField fullWidth label="제목" id="_title" value={title} onChange={e=> setTitle(e.target.value)} /><br/>
-            <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
-            <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
-            <TextField fullWidth label="시작 시간" id="_start_time" value={start_time} onChange={e=> setStart_time(e.target.value)}/> ~ <TextField fullWidth label="끝 시간" id="_end_time" value={end_time} onChange={e=> setEnd_time(e.target.value)}/><br/>
-            <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/><br/>
+            <Stack spacing={2}>
+            <TextField fullWidth label="제목" value={plannerTitle} onChange={e => setPlannerTitle(e.target.value)} />
+            <TextField fullWidth label="날짜" type="date" value={plannerDate} onChange={e => setPlannerDate(e.target.value)} />
+                   
+            {plans.map((plan, index) => (
+            <div key={index}>
+                <TextField fullWidth label="할 일" id={`todo_${index}`} value={plan.todo} onChange={e => handleChangePlan(index, 'todo', e.target.value)} />
+                <TextField fullWidth label="시작 시간" id={`start_time_${index}`} type="time" value={plan.start_time} onChange={e => handleChangePlan(index, 'start_time', e.target.value)} />
+                <TextField fullWidth label="끝 시간" id={`end_time_${index}`} type="time" value={plan.end_time} onChange={e => handleChangePlan(index, 'end_time', e.target.value)} />
+                <TextField fullWidth label="장소" id={`place_${index}`} value={plan.place} onChange={e => handleChangePlan(index, 'place', e.target.value)} />
+                <TextField fullWidth label="메모" id={`memo_${index}`} value={plan.memo} onChange={e => handleChangePlan(index, 'memo', e.target.value)} />
+                <Button onClick={() => handleRemovePlan(index)}>계획 삭제</Button>
+            </div>
+            ))}
+            <Button onClick={handleAddPlan}>계획 추가</Button>
             <Button type = "submit" variant="contained" >수정</Button>
             <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
+            </Stack>
         </Box>
     );
   }
+
+  export default PUpdatePage;

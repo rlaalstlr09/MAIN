@@ -1,0 +1,24 @@
+.App {
+    display: flex;
+    justify-content: center;
+    height: 100vh; 
+    margin-top: 0; 
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: row;
+    
+  }
+
+.calendar {
+    width: 60%;
+    height: 60%;
+  }
+
+.Button{
+  display: flex;
+  margin-left:10px;
+}
+.write{
+  width:130px;
+  height: 50px;
+}

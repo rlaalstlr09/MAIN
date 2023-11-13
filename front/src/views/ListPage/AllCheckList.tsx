@@ -5,6 +5,7 @@ import axios from 'axios';
 import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
 import WriteButton from '../component/WriteButton';
 import DeleteButton from '../component/DeleteButton';
+import './css/check.css';
 
 interface CheckList {
     id: number;

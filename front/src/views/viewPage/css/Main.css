@@ -1,13 +1,71 @@
-.container {
+.App{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    height: 100vh; 
+    margin-top: 0; 
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.button {
-    flex-basis: calc(40% - 10px); 
-    height:200px;
-    margin-bottom: 20px;  
-    margin-left: 20px;
+.info{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+  }
+.container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .button {
+    width: 300px; /* 버튼의 너비를 동일하게 설정 */
+    height: 300px;
+    margin: 20px;
+  }
+  
+  .vertical-divider {
+    position: absolute; /* 세로선을 절대 위치로 배치 */
+    top: 0;
+    bottom: 0;
+    left: 50%; /* 세로선을 container의 가운데에 위치시킴 */
+    top:50%;
+    transform: translate(-50%, -50%);
+    border-left: 1px solid lightgray;
+    height: 300px;
+  }
+  
+  .horizontal-divider {
+    width: 100%;
+    max-width: 300px; /* 가로선의 최대 너비를 버튼과 마진의 너비 합만큼 설정 */
+    border-top: 1px solid lightgray;
+    margin: 5px 0;
+  }
+
+  .btn-hr{
+    width:100px;
+    border-top:3px solid lightsalmon;
+    display: inline-black;
     margin-top: 20px;
-}
+    margin-bottom: 20px;
+  }
+
+  .button-content > div{
+    text-align: center;
+  }
+
+  
+  b{
+    font-size: 20px;
+  }

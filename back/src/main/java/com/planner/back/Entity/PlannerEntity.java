@@ -23,6 +23,6 @@ public class PlannerEntity {
     private String email;
     private Date date;
 
-    @OneToMany(mappedBy = "planner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "planner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PlanEntity> plans;
 }

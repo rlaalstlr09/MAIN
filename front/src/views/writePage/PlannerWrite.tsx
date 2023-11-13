@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 
 
@@ -31,6 +30,12 @@ import Stack from '@mui/material/Stack';
         ...plans,
         { title: "", todo: "",date:"", start_time: "", end_time: "", place: "", memo: "" }
       ]);
+    };
+
+    const handleRemovePlan = (index: number) => {
+      const newPlans = [...plans];
+      newPlans.splice(index, 1);
+      setPlans(newPlans);
     };
   
     const handleChangePlan = (index: number, field: keyof Plan, value: string) => {
@@ -76,8 +81,9 @@ import Stack from '@mui/material/Stack';
       autoComplete="off"
       onSubmit={handleSubmit}
   >
-      <Stack spacing={2}>
+     
           <h4>계획표 작성</h4>
+          <Stack spacing={2}>
           <TextField fullWidth label="제목" value={plannerTitle} onChange={e => setPlannerTitle(e.target.value)} />
             <TextField fullWidth label="날짜" type="date" value={plannerDate} onChange={e => setPlannerDate(e.target.value)} />
                    
@@ -88,10 +94,12 @@ import Stack from '@mui/material/Stack';
                   <TextField fullWidth label="끝 시간" id={`end_time_${index}`} type="time" value={plan.end_time} onChange={e => handleChangePlan(index, 'end_time', e.target.value)} />
                   <TextField fullWidth label="장소" id={`place_${index}`} value={plan.place} onChange={e => handleChangePlan(index, 'place', e.target.value)} />
                   <TextField fullWidth label="메모" id={`memo_${index}`} value={plan.memo} onChange={e => handleChangePlan(index, 'memo', e.target.value)} />
+                  <Button onClick={() => handleRemovePlan(index)}>계획 삭제</Button>
               </div>
           ))}
           <Button onClick={handleAddPlan}>계획 추가</Button>
           <Button type="submit">저장</Button>
+          <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
       </Stack>
   </Box>
 );
