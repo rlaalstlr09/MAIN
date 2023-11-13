@@ -2,7 +2,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import css from './css/Main.css';
+import './css/Main.css';
 
 export default function MainPage() {
     const [value, setValue] = React.useState('1');
