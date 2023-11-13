@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 import java.sql.Date;
 
@@ -18,14 +19,10 @@ public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int pNum;
     private String title;
     private String email;
-    private String place;
-    private String start_time;
-    private String end_time;
     private Date date;
-    private String todo;
-    private String memo;
-    private boolean del;
+
+    @OneToMany(mappedBy = "planner", fetch = FetchType.EAGER)
+    private List<PlanEntity> plans;
 }

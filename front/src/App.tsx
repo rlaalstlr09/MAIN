@@ -41,6 +41,7 @@ export default function App() {
             <Route path="/check/update/:id" element={<CUpdatePage />} />
             <Route path="/money/update/:id" element={<MUpdatePage />} />
             <Route path="/calendar/planner/update/:id" element={<PUpdatePage />} />
+            <Route path="/" element={<MainPage />} />
           </Routes>
         
       

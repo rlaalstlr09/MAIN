@@ -3,17 +3,21 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-interface Planner {
-  end_time: string;
+type Plan = {
   id: number;
-  title: string;
   todo: string;
   start_time: string;
+  end_time: string;
   place: string;
   memo: string;
-}
+};
 
-
+type Planner = {
+  id: number;
+  title: string;
+  date: string;
+  plans: Plan[];
+};
 
 export default function PlannerPage() {
   const [planner, setPlanner] = useState<Planner | null>(null);
@@ -35,31 +39,31 @@ export default function PlannerPage() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/planner/${id}`)
+    axios.get(`http://localhost:8080/api/planner/${id}`, { withCredentials: true })
       .then(response => {
         console.log(response.data);
         setPlanner(response.data);
       })
       .catch(error => console.error('There was an error!', error));
-  }, [id]);  
+  }, [id]);
 
    if (!planner) return null;
 
-   return (
-     <div>
-      <div>
-        <h2>{planner.title}</h2>
-        <p>Todo: {planner.todo}</p>
-        <p>Start Time: {planner.start_time}</p>
-        <p>End Time: {planner.end_time}</p>
-        <p>Place: {planner.place}</p>
-        <p>Memo: {planner.memo}</p>
-       </div>
-       <div>
-        
-        <Button onClick={() => handleUpdate(planner.id)}>수정</Button>
-        <Button onClick={() => handleDelete(planner.id)}>삭제</Button>
-       </div>
-     </div>
-   );
+  return (
+  <div>
+    <h2>{planner.title}</h2>
+    <p>Date: {planner.date}</p>
+    {planner.plans.map((plan, index) => (
+      <div key={index}>
+        <p>Todo: {plan.todo}</p>
+        <p>Start Time: {plan.start_time}</p>
+        <p>End Time: {plan.end_time}</p>
+        <p>Place: {plan.place}</p>
+        <p>Memo: {plan.memo}</p>
+      </div>
+    ))}
+    <Button onClick={() => handleUpdate(planner.id)}>수정</Button>
+    <Button onClick={() => handleDelete(planner.id)}>삭제</Button>
+  </div>
+);
 }

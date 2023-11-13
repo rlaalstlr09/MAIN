@@ -7,93 +7,93 @@ import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 
-export default function PWritePage() {
 
-    const [title, setTitle] = useState('');
-    const [todo, setTodo] = useState('');
-    const [date, setDate] = useState('');
-    const [start_time, setStart_time] = useState('');
-    const [end_time, setEnd_time] = useState('');
-    const [place, setPlace] = useState('');
-    const [memo, setMemo] = useState('');
+  interface Plan {
+    title: string;
+    todo: string;
+    date: string;
+    start_time: string;
+    end_time: string;
+    place: string;
+    memo: string;
+  }
+  
+  const PWritePage = () => {
+    const [plans, setPlans] = useState<Plan[]>([
+      { title: "", todo: "", date:"",start_time: "", end_time: "", place: "", memo: "" }
+    ]);
+    const [plannerTitle, setPlannerTitle] = useState("");
+    const [plannerDate, setPlannerDate] = useState("");
     const navigate = useNavigate();
+  
+    const handleAddPlan = () => {
+      setPlans([
+        ...plans,
+        { title: "", todo: "",date:"", start_time: "", end_time: "", place: "", memo: "" }
+      ]);
+    };
+  
+    const handleChangePlan = (index: number, field: keyof Plan, value: string) => {
+      const newPlans = [...plans];
+      newPlans[index][field] = value;
+      setPlans(newPlans);
+    };
+  
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    
-        try {
-            const response = await axios.post('http://localhost:8080/api/planner', {
-              title,
-              todo,
-              date,
-              start_time,
-              end_time,
-              place,
-              memo
-            },{
-                withCredentials: true
-            });
-
-             if (response.status === 200) { // HTTP 상태 코드가 성공을 의미하는 경우
-                alert('저장되었습니다.'); // 서버로부터 받은 메시지를 alert 창으로 출력
-                navigate(`/calendar`);
+      event.preventDefault();
+  
+      try {
+        // Save the planner
+        const plannerResponse = await axios.post('http://localhost:8080/api/planner', { title: plannerTitle, date: plannerDate }, { withCredentials: true });
+        const plannerId = plannerResponse.data.id;
+  
+        // Save the plans
+        await Promise.all(plans.map(plan => 
+          axios.post(`http://localhost:8080/api/planner/${plannerId}/plan`, plan, { withCredentials: true })
+        ));
+  
+        alert('저장되었습니다.');
+        navigate(`/calendar`);
+  
+        setPlans([{ title: "", todo: "",date:"", start_time: "", end_time: "", place: "", memo: "" }]);
+        setPlannerTitle("");
+        setPlannerDate("");
+        
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          console.error('계획표 작성 에러', error);
+          if (error.response?.data) {
+            alert(error.response.data);
+          }
+        }
       }
-            
-            setTitle('');
-            setTodo('');
-            setDate('');
-            setStart_time('');
-            setEnd_time('');
-            setPlace('');
-            setMemo('');
-
-        } catch (error) {
-            console.error('계획표 작성 에러', error);
-            if ((error as AxiosError).response && (error as AxiosError).response?.data) { 
-                alert((error as AxiosError).response?.data); // 에러 메시지를 alert 창으로 출력
-            }
-         }
-       };
-       return (
-        <Box 
-        component="form"
-        sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}>
-          <Stack spacing={2}>
+    };
+  return(
+     <Box
+      component="form"
+      sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+  >
+      <Stack spacing={2}>
           <h4>계획표 작성</h4>
-          <TextField fullWidth label="제목" id="_title" value={title} onChange={e=> setTitle(e.target.value)} />
-          <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/>
-          <TextField fullWidth label="날짜" id="_date" type="date" value={date} onChange={e=> setDate(e.target.value)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-         <Stack direction="row" spacing={2}>
-              <TextField fullWidth label="시작 시간" id="_start_time" type="time" value={start_time} onChange={e=> setStart_time(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  step: 300, // 5 min
-                }}
-              />
-            
-              <TextField fullWidth label="끝 시간" id="_end_time" type="time" value={end_time} onChange={e=> setEnd_time(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  step: 300, // 5 min
-                }}
-              />
-           </Stack>
-          <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/>
-          <TextField fullWidth label="메모" id="_memo" value={memo} onChange={e=> setMemo(e.target.value)}/>
-          
-        <div><Button type = "submit"variant="contained" >저장</Button>
-        <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button></div>
-        </Stack>
-        </Box>
-      );
-    }
+          <TextField fullWidth label="제목" value={plannerTitle} onChange={e => setPlannerTitle(e.target.value)} />
+            <TextField fullWidth label="날짜" type="date" value={plannerDate} onChange={e => setPlannerDate(e.target.value)} />
+                   
+          {plans.map((plan, index) => (
+              <div key={index}>
+                  <TextField fullWidth label="할 일" id={`todo_${index}`} value={plan.todo} onChange={e => handleChangePlan(index, 'todo', e.target.value)} />
+                  <TextField fullWidth label="시작 시간" id={`start_time_${index}`} type="time" value={plan.start_time} onChange={e => handleChangePlan(index, 'start_time', e.target.value)} />
+                  <TextField fullWidth label="끝 시간" id={`end_time_${index}`} type="time" value={plan.end_time} onChange={e => handleChangePlan(index, 'end_time', e.target.value)} />
+                  <TextField fullWidth label="장소" id={`place_${index}`} value={plan.place} onChange={e => handleChangePlan(index, 'place', e.target.value)} />
+                  <TextField fullWidth label="메모" id={`memo_${index}`} value={plan.memo} onChange={e => handleChangePlan(index, 'memo', e.target.value)} />
+              </div>
+          ))}
+          <Button onClick={handleAddPlan}>계획 추가</Button>
+          <Button type="submit">저장</Button>
+      </Stack>
+  </Box>
+);
+}
+export default PWritePage;

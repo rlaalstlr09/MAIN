@@ -1,6 +1,8 @@
 package com.planner.back.Controller;
 
+import com.planner.back.Entity.PlanEntity;
 import com.planner.back.Entity.PlannerEntity;
+import com.planner.back.Repository.PlanRepository;
 import com.planner.back.Repository.PlannerRepository;
 import com.planner.back.Service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,67 +20,72 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @RestController
+
 @CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST},allowCredentials = "true")
 public class PlannerController {
-    @Autowired
-    private final PlannerRepository repository;
+
+    private final PlannerRepository PlannerRepository;
     private final SessionService sessionService;
+    private final PlanRepository planRepository;
 
     @PostMapping("/api/planner")
-    public ResponseEntity<?> createPlanner(HttpServletRequest request,  @RequestBody PlannerEntity planner){
-        try {
+    public PlannerEntity createPlanner(HttpServletRequest request,  @RequestBody PlannerEntity planner){
+
             planner.setEmail(sessionService.getCurrentUserEmail(request));
-            repository.save(planner);
-            return new ResponseEntity<>("계획표 작성 성공", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("계획표 작성 에러", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return PlannerRepository.save(planner);
+
+    }
+
+    @PostMapping("/api/planner/{plannerId}/plan")
+    public PlanEntity createPlan(@PathVariable Long plannerId, @RequestBody PlanEntity plan) {
+        PlannerEntity planner = PlannerRepository.findById(plannerId)
+                .orElseThrow(() -> new IllegalArgumentException("Planner not found with id " + plannerId));
+
+        plan.setPlanner(planner);
+        return planRepository.save(plan);
     }
 
     @GetMapping("/api/planner")
     public List<PlannerEntity> getAllPlanner(HttpServletRequest request){
-        return repository.findByEmail(sessionService.getCurrentUserEmail(request));
+        return PlannerRepository.findByEmail(sessionService.getCurrentUserEmail(request));
     }
 
     @GetMapping("/api/planner/{id}")
-    public PlannerEntity getPlanner(@PathVariable Long id) {
-
-        return repository.findById(id)
+    public PlannerEntity getPlanner(@PathVariable Long id, HttpServletRequest request) {
+        String email = (String) sessionService.getCurrentUserEmail(request);
+        return PlannerRepository.findByIdAndEmail(id, email)
                 .orElseThrow(() -> new IllegalArgumentException("Planner not found with id " + id));
+
     }
     @PutMapping("/api/planner/{id}")
     public PlannerEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody PlannerEntity newPlanner) {
         String email = (String) sessionService.getCurrentUserEmail(request);
-        return repository.findById(id)
+        return PlannerRepository.findById(id)
 
                 .map(Planner -> {
                     if(!Planner.getEmail().equals(email)) {
                         throw new RuntimeException("권한이 없습니다.");
                     }
-                    Planner.setDate(newPlanner.getDate());
-                    Planner.setPlace(newPlanner.getPlace());
-                    Planner.setTitle(newPlanner.getTitle());
-                    Planner.setTodo(newPlanner.getTodo());
-                    Planner.setStart_time(newPlanner.getStart_time());
-                    Planner.setEnd_time(newPlanner.getEnd_time());
-                    Planner.setMemo(newPlanner.getMemo());
 
-                    return repository.save(Planner);
+                    Planner.setDate(newPlanner.getDate());
+                    Planner.setTitle(newPlanner.getTitle());
+
+                    return PlannerRepository.save(Planner);
                 })
                 .orElseGet(() -> {
                     newPlanner.setId(id);
-                    return repository.save(newPlanner);
+                    return PlannerRepository.save(newPlanner);
                 });
     }
 
     @DeleteMapping("/api/planner/{id}")
     public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
         String email = (String) sessionService.getCurrentUserEmail(request);
-        PlannerEntity planner = repository.findById(id).orElseThrow(() -> new RuntimeException("계획표가 존재하지 않습니다."));
+        PlannerEntity planner = PlannerRepository.findById(id).orElseThrow(() -> new RuntimeException("계획표가 존재하지 않습니다."));
         if(!planner.getEmail().equals(email)) {
             throw new RuntimeException("권한이 없습니다.");
         }
 
-        repository.deleteById(id);
+        PlannerRepository.deleteById(id);
     }
 }

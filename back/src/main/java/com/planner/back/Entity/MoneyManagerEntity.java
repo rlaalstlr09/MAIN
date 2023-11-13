@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+import java.sql.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,11 +19,10 @@ public class MoneyManagerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
+    private Date date;
     private String email;
     private int inMoney;
     private int outMoney;
     private String place;
     private int headCount;
-    private boolean del;
 }

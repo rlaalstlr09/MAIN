@@ -16,7 +16,12 @@ const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
         event.preventDefault();
         try {
             
-            const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
+            const response = await axios.get('http://localhost:8080/api/session', { 
+                withCredentials: true ,
+                validateStatus: function (status) {
+                    return status < 300; // 3xx 응답을 오류로 취급합니다.
+                }
+            });
 
             if (response.status === 200) {
                 
@@ -24,7 +29,7 @@ const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
             }
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
-                if (error.response && error.response.status === 401) {
+                if (error.response && (error.response.status === 401 || error.response.status === 302)) {
                     
                     setLoginModalOpen(true);
                 }

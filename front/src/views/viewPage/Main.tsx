@@ -1,29 +1,23 @@
 import { TabContext, TabList } from '@mui/lab';
-import { Box, Tab } from '@mui/material';
+import { Box, Button, Tab } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './css/Main.css'
 
-export default function ComponentName() {
+export default function MainPage() {
     const [value, setValue] = React.useState('1');
+    const navigate = useNavigate();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
     return (
-        <div>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label="지도" component={Link} to="/map" />
-                        <Tab label="계획표" component={Link} to="/calendar" />
-                        <Tab label="체크리스트" component={Link} to="/check" />
-                        <Tab label="예산관리" component={Link} to="/money" />
-                        </TabList>
-                    </Box> 
-                </TabContext>
-            </Box>
-        </div>
+        <div className="container">
+        <Button className="button" variant="contained" onClick={() => navigate('/map')}>지도</Button>
+        <Button className="button" variant="contained" onClick={() => navigate('/calendar')}>계획표</Button>
+        <Button className="button" variant="contained" onClick={() => navigate('/check')}>체크리스트</Button>
+        <Button className="button" variant="contained" onClick={() => navigate('/money')}>예산관리</Button>
+    </div>
     );
 };
 

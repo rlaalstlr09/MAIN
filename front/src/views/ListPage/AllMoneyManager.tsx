@@ -1,10 +1,11 @@
-import React, {Component, useEffect, useState} from 'react';
-import '../css/MoneyManager.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Collapse, Box, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import WriteButton from '../component/WriteButton';
 import DeleteButton from '../component/DeleteButton';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 interface MoneyManager {
     id: number;
@@ -15,6 +16,59 @@ interface MoneyManager {
     headCount:number;
 }
 
+function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: number) => void, getMoneyManager: () => void }) {
+    const { date, data, handleUpdate, getMoneyManager } = props;
+    const [open, setOpen] = useState(false);
+
+    return (
+        <React.Fragment>
+            <TableRow>
+                <TableCell>
+                    <IconButton size="small" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </IconButton>
+                </TableCell>
+                <TableCell colSpan={7}>{date}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box margin={1}>
+                        <Table size="small" aria-label="purchases">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Id</TableCell>
+                                    <TableCell>장소</TableCell>
+                                    <TableCell align="right">입금</TableCell>
+                                    <TableCell align="right">출금</TableCell>
+                                    <TableCell align="right">인원수</TableCell>
+                                    <TableCell align="right">수정/삭제</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {data.map((item) => (
+                                    <TableRow key={item.id}>
+                                        <TableCell component="th" scope="row">{item.id}</TableCell>
+                                        <TableCell>{item.place}</TableCell>
+                                        <TableCell align="right">{item.inMoney}</TableCell>
+                                        <TableCell align="right">{item.outMoney}</TableCell>
+                                        <TableCell align="right">{item.headCount}</TableCell>
+                                        <TableCell align="right">
+                                            <Button onClick={() => handleUpdate(item.id)}>수정</Button>
+                                            <DeleteButton id={item.id} getData={getMoneyManager} path="money" />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </React.Fragment>
+    );
+}
+
 export default function MoneyPage() {
     const [moneyManager, setMoneyManager] = useState<MoneyManager[]>([]);
     const navigate = useNavigate();
@@ -23,35 +77,9 @@ export default function MoneyPage() {
         navigate(`/money/update/${id}`);
     };
 
-    
-
-    const handleDelete = async (id: number) => {
-        try {
-            await axios.delete(`http://localhost:8080/api/money/${id}`, { withCredentials: true });
-            alert('삭제 성공');
-            const response = await axios.get('http://localhost:8080/api/money', { withCredentials: true });
-            setMoneyManager(response.data);
-        } catch (error) {
-            console.error('삭제 에러', error);
-        }
-    };
-
-    const handleWrite = async () => {        //나중에 삭제
-        try {
-            const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
-            if (response.data.email) {
-                navigate('/check/write');
-            } else {
-                navigate('/login');
-            }
-        } catch (error) {
-            console.error('There was an error!', error);
-        }
-    };
-
     const getMoneyManager = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/check', { withCredentials: true });
+            const response = await axios.get('http://localhost:8080/api/money', { withCredentials: true });
             setMoneyManager(response.data);
         } catch (error) {
             console.error('There was an error!', error);
@@ -62,38 +90,26 @@ export default function MoneyPage() {
         getMoneyManager();
     }, []);
 
+    const groupedData = moneyManager.reduce((acc: { [date: string]: MoneyManager[] }, item) => {
+        (acc[item.date] = acc[item.date] || []).push(item);
+        return acc;
+    }, {});
 
     return (
         <div className="App"> 
-        <div style={{ height: '60%', width: '60%' }}> 
+        <div style={{ height: '60%', width: '80%' }}> 
             <h4>예산관리</h4><br/>
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>#</TableCell>
+                            <TableCell />
                             <TableCell>날짜</TableCell>
-                            <TableCell>장소</TableCell>
-                            <TableCell>입금</TableCell>
-                            <TableCell>출금</TableCell>
-                            <TableCell>인원수</TableCell>
-                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {moneyManager.map((item: MoneyManager) => (
-                            <TableRow key={item.id}>
-                                <TableCell>{item.id}</TableCell>
-                                <TableCell>{item.date}</TableCell>
-                                <TableCell>{item.place}</TableCell>
-                                <TableCell>{item.inMoney}</TableCell>
-                                <TableCell>{item.outMoney}</TableCell>
-                                <TableCell>{item.headCount}</TableCell>
-                                <TableCell>
-                                    <Button onClick={() => handleUpdate(item.id)}>수정</Button>
-                                    <DeleteButton id={item.id} getData={getMoneyManager} path="check" />
-                                </TableCell>
-                            </TableRow>
+                        {Object.entries(groupedData).map(([date, data]) => (
+                            <Row key={date} date={date} data={data} handleUpdate={handleUpdate} getMoneyManager={getMoneyManager} />
                         ))}
                     </TableBody>
                 </Table>
@@ -104,6 +120,5 @@ export default function MoneyPage() {
         </div>
         </div>
         </div>
-           
     );
 }

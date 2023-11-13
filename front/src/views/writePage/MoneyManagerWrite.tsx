@@ -75,9 +75,9 @@ export default function MWritePage() {
             <Stack spacing={2}>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <TextField fullWidth label="사용 예산" id="_memo" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
-            <TextField fullWidth label="입금 예산" id="_memo" value={inMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
-            <TextField fullWidth label="인원 수" id="_memo" value={headCount} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <TextField fullWidth label="사용 예산" id="_outMoney" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
+            <TextField fullWidth label="입금 예산" id="_inMoney" value={inMoney} onChange={handleIntegerInput(setInMoney)}/><br/>
+            <TextField fullWidth label="인원 수" id="_headCount" value={headCount} onChange={handleIntegerInput(setHeadCount)}/><br/>
             <div>
             <Button type = "submit" variant="contained" >저장</Button>
             <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
