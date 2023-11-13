@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '../css/Calendar.css';
-import { Button } from '@mui/material';
 import WriteButton from '../component/WriteButton';
 
 interface Planner {
@@ -20,19 +19,6 @@ export default function CalendarPage() {
   const handleClick = (info : any) => {
     navigate(`/calendar/planner/${info.event.id}`);
   }
-
-  const handleWrite = async () => {    //나중에 삭제
-    try {
-        const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
-        if (response.data.email) {
-            navigate('/check/write');
-        } else {
-            navigate('/login');
-        }
-    } catch (error) {
-        console.error('There was an error!', error);
-    }
-};
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/planner`,{

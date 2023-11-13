@@ -53,7 +53,11 @@ public class PlannerController {
     @GetMapping("/api/planner/{id}")
     public PlannerEntity getPlanner(@PathVariable Long id, HttpServletRequest request) {
         String email = (String) sessionService.getCurrentUserEmail(request);
-        return PlannerRepository.findByIdAndEmail(id, email)
+        PlannerEntity planner = PlannerRepository.findById(id).orElseThrow(() -> new RuntimeException("계획표가 존재하지 않습니다."));
+        if(!planner.getEmail().equals(email)) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+        return PlannerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Planner not found with id " + id));
 
     }

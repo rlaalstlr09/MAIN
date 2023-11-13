@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { propsType } from './MapLanding';
-import '../css/Map.css';
+import './css/Map.css';
 
 interface placeType {
   place_name: string,

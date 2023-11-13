@@ -1,0 +1,23 @@
+
+
+.landing-page{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
+.btn-box{
+    display: flex;
+}
+
+.search-form{
+    display: flex;
+}
+
+.form_input{
+    width: 350px;
+}
+.search-form-container{
+    display: flex;
+    justify-content:space-between;
+}

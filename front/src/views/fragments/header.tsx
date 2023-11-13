@@ -62,7 +62,12 @@ return(
                                     <Tab label="계획표" component={Link} to="/calendar" />
                                     <Tab label="체크리스트" component={Link} to="/check" />
                                     <Tab label="예산관리" component={Link} to="/money" />
-                                    <Box sx={{width:'100px', marginLeft:'180%'}}>
+                                    
+                                    
+
+                                </Box>
+                            </Box>
+                            <Box sx={{width:'100px', marginLeft:'60%', marginTop:'20px'}}>
                                     {isLogin ? (
                                         <>
                                         <LogoutButton onLogout={handleLogout} />
@@ -76,14 +81,12 @@ return(
                                         </>
                                     )}
                                     </Box> 
-
-                                </Box>
-                            </Box>
                         </TabList>
 
                         
                     </Box> 
                 </TabContext>
             </Box>
+            
 )
 }

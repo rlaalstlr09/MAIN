@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
 export default function MUpdatePage() {
 
@@ -88,13 +89,17 @@ export default function MUpdatePage() {
             onSubmit={handleSubmit}
         >
             <h4>예산관리 수정</h4>
+            <Stack spacing={2}>
             <TextField fullWidth label="날짜" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
             <TextField fullWidth label="사용 예산" id="_outMoney" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
             <TextField fullWidth label="입금 예산" id="_inMoney" value={inMoney} onChange={handleIntegerInput(setInMoney)}/><br/>
             <TextField fullWidth label="인원 수" id="_headCount" value={headCount} onChange={handleIntegerInput(setHeadCount)}/><br/>
+            <div>
             <Button type = "submit" variant="contained" >수정</Button>
             <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
+            </div>
+            </Stack>
         </Box>
     );
   }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Map from './Map';
+import { Button, TextField } from '@mui/material';
+import './css/Map.css';
 
 export interface propsType {
   searchKeyword: string
@@ -36,9 +38,9 @@ return (
       <div className="search-form-container">
         <form className="search-form" onSubmit={ submitKeyword }>
           <label htmlFor="place" className="form__label">
-            <input type="text" id="movie-title" className="form__input" name="place" onChange={ keywordChange } placeholder="검색어를 입력해주세요. (ex: 강남 맛집)" required />
+            <TextField id='movie-title' className='form_input' name="place" onChange={keywordChange } placeholder="검색어를 입력해주세요. (ex: 강남 맛집)" required />
             <div className="btn-box">
-              <input className="btn form__submit" type="submit" value="검색" onClick={ valueChecker }/>
+              <Button variant="contained" className='btn from__submit' onClick={ valueChecker}>검색</Button>
             </div>
           </label>
         </form>
@@ -50,4 +52,4 @@ return (
 )
 }
 
-export default LandingPage
+export default LandingPage;

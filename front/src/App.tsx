@@ -8,17 +8,11 @@ import CheckPage from './views/ListPage/AllCheckList'
 import MWritePage from './views/writePage/MoneyManagerWrite'
 import MoneyPage from './views/ListPage/AllMoneyManager'
 import PlannerPage from './views/viewPage/Planner'
-import LoginBtnPage from './views/Login/GoogleLoginButton'
-import { Box, Tab } from '@mui/material';
-import { TabContext, TabList } from '@mui/lab';
-import React from 'react';
 import LandingPage from './views/viewPage/MapLanding';
 import Header from './views/fragments/Header'
 import CUpdatePage from './views/updatePage/CheckListUpdate';
 import MUpdatePage from './views/updatePage/MoneyManagerUpdate';
 import PUpdatePage from './views/updatePage/PlannerUpdate';
-import GoogleLogin from 'react-google-onetap';
-import GoogleLoginButton from './views/Login/GoogleLoginButton';
 
 export default function App() {
   

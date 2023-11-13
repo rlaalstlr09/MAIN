@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
 
 
@@ -73,10 +74,16 @@ export default function CUpdatePage() {
             onSubmit={handleSubmit}
         >
             <h4>체크리스트 수정</h4><br/>
+            <Stack spacing={2}>
+
+            
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
+            <div>
             <Button type = "submit" variant="contained" >수정</Button>
             <Button variant="contained" onClick={() => navigate('/check')}>취소</Button>
+            </div>
+            </Stack>
         </Box>
     );
   }
