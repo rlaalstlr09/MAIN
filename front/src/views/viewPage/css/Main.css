@@ -1,4 +1,4 @@
-.App{
+.main-container{
     display: flex;
     justify-content: center;
     height: 100vh; 
@@ -9,30 +9,30 @@
 
 .info{
     display: flex;
-    justify-content: center;
     text-align: center;
     flex-direction: column;
     width: 100%;
   }
-.container {
+.button-container {
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top:10%;
     position: relative;
   }
   
   .row {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
   
-  .button {
+  .main-button {
     width: 300px; /* 버튼의 너비를 동일하게 설정 */
     height: 300px;
-    margin: 20px;
+    margin: 20px 10px;
   }
   
   .vertical-divider {
@@ -68,4 +68,8 @@
   
   b{
     font-size: 20px;
+  }
+
+  .row > * {
+    margin: 10px;
   }

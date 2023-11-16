@@ -1,9 +1,0 @@
-.App {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh; 
-    margin-top: 0; 
-    width: 100%;
-    flex-direction: row;
-  }

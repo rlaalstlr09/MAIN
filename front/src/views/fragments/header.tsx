@@ -12,6 +12,7 @@ import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
 import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone';
 
 export default function Header() {
+    
     const [value, setValue] = React.useState('1');
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -58,20 +59,20 @@ return(
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Box className="tab-list" sx={{ '& > *': { mr: 10 } }}>
-                                <Box sx={{ mr: 3 }}>
+                                <Box className="tab-list">
+                                <Box >
                                     <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
                                     <img className="logo" src="Logo.png" alt="logo" />
                                     </Link>
                                     </Box>
-                                    <Tab icon={<MapTwoToneIcon />} label="지도" component={Link} to="/map" />
-                                    <Tab icon={<EditCalendarTwoToneIcon/>}label="계획표" component={Link} to="/calendar" />
-                                    <Tab icon={<CheckBoxTwoToneIcon/>}label="체크리스트" component={Link} to="/check" />
-                                    <Tab icon={<LocalAtmTwoToneIcon/>}label="예산관리" component={Link} to="/money" />
+                                    <Tab className="tab" icon={<MapTwoToneIcon />} label="지도" component={Link} to="/map" />
+                                    <Tab className="tab" icon={<EditCalendarTwoToneIcon/>}label="계획표" component={Link} to="/calendar" />
+                                    <Tab className="tab" icon={<CheckBoxTwoToneIcon/>}label="체크리스트" component={Link} to="/check" />
+                                    <Tab className="tab" icon={<LocalAtmTwoToneIcon/>}label="예산관리" component={Link} to="/money" />
                                
                                 </Box>
                             </Box>
-                            <Box sx={{width:'100px', marginLeft:'60%', marginTop:'20px'}}>
+                            <Box sx={{width:'100px', marginLeft:'50%', marginTop:'20px'}}>
                                     {isLogin ? (
                                         <>
                                         <LogoutButton onLogout={handleLogout} />

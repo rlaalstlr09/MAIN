@@ -61,6 +61,7 @@ export default function CheckPage() {
         <div className="App">
             <div style={{ height: '60%', width: '60%' }}>
                 <h4>체크리스트</h4><br/>
+                {checkList.length > 0 ? (
                 <DataGrid
                     rows={checkList}
                     columns={columns}
@@ -72,6 +73,9 @@ export default function CheckPage() {
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
+                ) : (
+                    <p>작성된 체크리스트가 없습니다.</p>
+                  )}
                 <div className="Button">
                 <WriteButton redirectPath='/check/write'/>
              </div>
