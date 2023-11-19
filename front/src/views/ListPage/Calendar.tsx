@@ -4,7 +4,7 @@ import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import WriteButton from '../component/WriteButton';
-import './css/calendar.css';
+import './css/ListPage.css';
 
 interface Planner {
   id: number;
@@ -43,6 +43,7 @@ export default function CalendarPage() {
             date: new Date(planner.date).toISOString(),
           }))}
           eventClick= {handleClick}
+          displayEventTime={false}
         />
     </div>
     <div className="Button">

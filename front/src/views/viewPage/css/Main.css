@@ -1,10 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  background: linear-gradient(0deg, #A0B8C5 146px, #EEF2F3 546px);
+  font-family: 'Noto Sans KR, sans-serif';
+}
+
 .main-container{
-    display: flex;
     justify-content: center;
-    height: 100vh; 
-    margin-top: 0; 
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .info{
@@ -12,6 +17,8 @@
     text-align: center;
     flex-direction: column;
     width: 100%;
+    margin-top: 5%;
+    font-family: 'Pacifico' , cursive;
   }
 .button-container {
     display: flex;

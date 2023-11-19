@@ -13,6 +13,7 @@ import Header from './views/fragments/Header'
 import CUpdatePage from './views/updatePage/CheckListUpdate';
 import MUpdatePage from './views/updatePage/MoneyManagerUpdate';
 import PUpdatePage from './views/updatePage/PlannerUpdate';
+import Footer from './views/fragments/Footer';
 
 export default function App() {
   
@@ -40,6 +41,7 @@ export default function App() {
         
       
     </Router>
+    <Footer/>
     </div>
   );
 }

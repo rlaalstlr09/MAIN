@@ -1,8 +1,9 @@
-import { Button } from "@mui/material";
+import { Button, Fab } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FC, MouseEvent, useState } from "react";
 import GoogleLoginModal from "../Login/GoogleLoginButton";
+import { Add as AddIcon } from '@mui/icons-material';
 
 interface WriteButtonProps {
     redirectPath: string;
@@ -42,7 +43,9 @@ const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
 
     return(
         <div>
-            <Button variant="contained" onClick={handleWriteButton}>작성</Button>
+            <Fab color="primary" aria-label="add" style={{ position: 'fixed', bottom: 100, right: 50 }} onClick={handleWriteButton}>
+                <AddIcon />
+            </Fab>
             <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
         </div>
     )
