@@ -244,6 +244,7 @@ const Map = (props: propsType) => {
 
   return (
     <div className="map-container">
+      
       <div id="map" className="map"></div>
       <div id="search-result">
         <p className="result-text">
@@ -256,6 +257,7 @@ const Map = (props: propsType) => {
           <ul id="places-list"></ul>
         </div>
         <div id="pagination"></div>
+      
       </div>
     </div>
   )

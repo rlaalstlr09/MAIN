@@ -5,6 +5,17 @@
     margin-top: 3%;
     min-height: 100vh;
 }
+.landing-page__inner{
+    min-width: 900px;
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+    border: 1px solid;
+    border-color: black;
+    
+    align-items: center;
+
+}
 
 .btn-box{
     display: flex;
@@ -19,7 +30,7 @@
 }
 .search-form-container{
     display: flex;
-    justify-content:space-between;
+    justify-content:center;
 }
 
 .map{
@@ -27,6 +38,7 @@
     width : 700px;
     height: 700px;
     margin-top: 30px;
+    
 }
 
 .btn{

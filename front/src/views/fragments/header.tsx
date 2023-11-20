@@ -72,7 +72,7 @@ return(
                                
                                 </Box>
                             </Box>
-                            <Box sx={{width:'100px', marginLeft:'50%', marginTop:'20px'}}>
+                            <Box sx={{ml:'auto', marginTop:'20px'}}>
                                     {isLogin ? (
                                         <>
                                         <LogoutButton onLogout={handleLogout} />

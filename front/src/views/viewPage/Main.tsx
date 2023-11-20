@@ -17,6 +17,7 @@ export default function MainPage() {
         <h1>PlanIt</h1>
         <b>여행계획을 편하게 작성하고 관리하세요!</b>
       </div>
+      <hr/>
       <div className='button-container'>
       <div className="vertical-divider" />
       <div className="row">
