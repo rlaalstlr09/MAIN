@@ -1,15 +1,23 @@
 .logo {
     margin-left:10px;
     margin-top: 10px;
-    width: 65px;
-    height: 65px;
+    width: 120px;
+    height: auto;
   }
   
   .tab-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
   }
-  .MuiTab-root {
+  .MuiBox-root {
+    margin-right: 20px;
+    background-color: #5599FF;
+
+  }
+
+  a{
     margin-right: 20px;
   }
+

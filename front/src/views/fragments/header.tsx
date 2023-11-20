@@ -6,10 +6,10 @@ import LogoutButton from "../Login/LogoutButton";
 import './css/Header.css'
 import axios from "axios";
 import GoogleLoginModal from "../Login/GoogleLoginButton";
-import MapTwoToneIcon from '@mui/icons-material/MapTwoTone';
-import EditCalendarTwoToneIcon from '@mui/icons-material/EditCalendarTwoTone';
-import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
-import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone';
+import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
 
 export default function Header() {
     
@@ -60,15 +60,15 @@ return(
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Box className="tab-list">
-                                <Box >
+
                                     <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
                                     <img className="logo" src="Logo.png" alt="logo" />
                                     </Link>
-                                    </Box>
-                                    <Tab className="tab" icon={<MapTwoToneIcon />} label="지도" component={Link} to="/map" />
-                                    <Tab className="tab" icon={<EditCalendarTwoToneIcon/>}label="계획표" component={Link} to="/calendar" />
-                                    <Tab className="tab" icon={<CheckBoxTwoToneIcon/>}label="체크리스트" component={Link} to="/check" />
-                                    <Tab className="tab" icon={<LocalAtmTwoToneIcon/>}label="예산관리" component={Link} to="/money" />
+                                    
+                                    <Tab className="tab" icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
+                                    <Tab className="tab" icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
+                                    <Tab className="tab" icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
+                                    <Tab className="tab" icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
                                
                                 </Box>
                             </Box>

@@ -13,11 +13,13 @@ export default function MainPage() {
   };
   return (
     <div className="main-container">
-      <div className='info'>
-        <h1>PlanIt</h1>
+      <div className="title-image">
+        <img id = "main-image" src="main-image.png" alt = "메인 이미지"/>
+      <div className='title'>
+        <h1 id="main-title">PlanIt</h1>
         <b>여행계획을 편하게 작성하고 관리하세요!</b>
       </div>
-      <hr/>
+      </div>
       <div className='button-container'>
       <div className="vertical-divider" />
       <div className="row">
