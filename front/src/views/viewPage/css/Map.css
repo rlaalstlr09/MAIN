@@ -11,7 +11,8 @@
     height: 80%;
     justify-content: center;
     border: 1px solid;
-    border-color: black;
+    border-color: #3366CC;
+    border-radius: 10px;
     
     align-items: center;
 }
@@ -22,6 +23,8 @@
 
 .search-form{
     display: flex;
+    margin-top: 3%;
+    margin-bottom: 5%;
 }
 
 .form_input{
@@ -36,12 +39,12 @@
     display: flex;
     width : 700px;
     height: 700px;
-    margin-top: 30px;
     margin-left: 10%;
+    margin-bottom: 5%;
+    border: black 1px solid;
 }
 .search-result{
     display: flex;
-    margin-left:10%;
 }
 
 .btn{
