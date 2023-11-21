@@ -59,12 +59,14 @@ export default function CheckPage() {
     
     return (
         <div className="App">
+            <div className="outline">
             <div style={{ height: '60%', width: '60%' }}>
                 <h4>체크리스트</h4><br/>
                 {checkList.length > 0 ? (
                 <DataGrid
                     rows={checkList}
                     columns={columns}
+                    
                     initialState={{
                       pagination: {
                         paginationModel: { page: 0, pageSize: 5 },
@@ -80,7 +82,7 @@ export default function CheckPage() {
                 <WriteButton redirectPath='/check/write'/>
              </div>
             </div>
-            
+            </div>
             
         </div>
     );

@@ -14,7 +14,6 @@
     border-color: black;
     
     align-items: center;
-
 }
 
 .btn-box{
@@ -38,9 +37,17 @@
     width : 700px;
     height: 700px;
     margin-top: 30px;
-    
+    margin-left: 10%;
+}
+.search-result{
+    display: flex;
+    margin-left:10%;
 }
 
 .btn{
     height: 50px;
+}
+
+.map-container{
+    display: flex;
 }

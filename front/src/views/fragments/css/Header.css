@@ -9,11 +9,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 5px;
     
   }
-  .MuiBox-root {
+  .MuiTab-root {
     margin-right: 20px;
-    background-color: #5599FF;
 
   }
 

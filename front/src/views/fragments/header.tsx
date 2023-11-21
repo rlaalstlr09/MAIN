@@ -54,25 +54,26 @@ export default function Header() {
     }, []);
 
 return(
-<Box sx={{  width: '100%', typography: 'body1' }}>
+    
+<Box style={{ backgroundColor: '#5599FF' }} sx={{  width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Box className="tab-list">
+                                <Box className="tab-list" sx={{}}>
 
                                     <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
                                     <img className="logo" src="Logo.png" alt="logo" />
                                     </Link>
                                     
-                                    <Tab className="tab" icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
-                                    <Tab className="tab" icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
-                                    <Tab className="tab" icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
-                                    <Tab className="tab" icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
+                                    <Tab style={{ marginRight: '10px' }} icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
+                                    <Tab style={{ marginRight: '10px' }} icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
+                                    <Tab style={{ marginRight: '10px' }} icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
+                                    <Tab style={{ marginRight: '10px' }} icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
                                
                                 </Box>
                             </Box>
-                            <Box sx={{ml:'auto', marginTop:'20px'}}>
+                            <Box sx={{position: 'relative', right: '50px', ml:'auto', marginTop:'20px'}}>
                                     {isLogin ? (
                                         <>
                                         <LogoutButton onLogout={handleLogout} />
