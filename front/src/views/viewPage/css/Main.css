@@ -1,28 +1,33 @@
+@import url(https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap);
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  background: linear-gradient(0deg,#EEF2F3, rgb(210, 227, 255));
+  background-image: url('../../../../public/main-pattern2.png');
+  font-family:-apple-system,Noto Sans KR,Roboto,Helvetica,Arial,sans-serif;
 }
 
 .main-container{
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  flex-direction: row;
+  min-height: 100vh;
 }
 
 .title{
   
   position: absolute;
   top: 50%;
-  left: 20%;
+  right: -15%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
   }
 
   .title-image{
-    width: 100vw;
+    width: 100%;
     position: relative;
     display: inline-block;
   }
@@ -30,57 +35,51 @@ body {
   #main-image{
     width: 100%;
     height: auto;
+    position: relative;
   }
-  
 #main-title{
   font-family: 'Pacifico' , cursive;
-  font-size: 6vh;
+  font-size: 3vw;
 }
 @media screen and (max-height: 600px) {
   #main-title{
     font-size: 40px;
   }
+  
 }
 .button-container {
     display: flex;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     position: relative;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap:30px;
+    margin:5% 0;
     
   }
   
+ 
   .main-button {
-    width: 300px; /* 버튼의 너비를 동일하게 설정 */
-    height: 300px;
+    min-width: 200px; /* 버튼의 너비를 동일하게 설정 */
+    min-height: 300px;
+    width: 20%;
     margin: 20px 10px;
-  }
-  
-  .vertical-divider {
-    position: absolute; /* 세로선을 절대 위치로 배치 */
-    top: 0;
-    bottom: 0;
-    left: 50%; /* 세로선을 container의 가운데에 위치시킴 */
-    top:50%;
-    transform: translate(-50%, -50%);
-    border-left: 1px solid lightgray;
-    height: 300px;
-  }
-  
-  .horizontal-divider {
-    width: 100%;
-    max-width: 300px; /* 가로선의 최대 너비를 버튼과 마진의 너비 합만큼 설정 */
-    border-top: 1px solid lightgray;
-    margin: 5px 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
   }
 
+  .icon-style{
+    position: absolute;
+    top: -30px;
+    right: -35px;
+
+    font-size: 200px;
+    color:brown;
+    opacity: 0.15;
+  }
+  
   .btn-hr{
     width:100px;
     border-top:3px solid lightsalmon;
@@ -95,9 +94,17 @@ body {
 
   
   b{
-    font-size: 20px;
+    font-size: 40px;
   }
 
-  .row > * {
-    margin: 10px;
+  small{
+    font-size: 15px;
+  }
+
+  .planner-text{
+    display: flex;
+  }
+
+  .main-info{
+    font-size: 20px;
   }

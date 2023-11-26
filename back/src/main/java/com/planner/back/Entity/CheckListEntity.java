@@ -21,5 +21,5 @@ public class CheckListEntity {
     private String email;
     private String todo;
     private String place;
-    private boolean chk;
+    private boolean checked=false;
 }
