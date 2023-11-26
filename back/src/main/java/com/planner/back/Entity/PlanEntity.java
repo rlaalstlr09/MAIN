@@ -23,8 +23,9 @@ public class PlanEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "planner_id")
     private PlannerEntity planner;
-
+    @Column(nullable = false)
     private String start_time;
+    @Column(nullable = false)
     private String end_time;
     private String todo;
     private String memo;

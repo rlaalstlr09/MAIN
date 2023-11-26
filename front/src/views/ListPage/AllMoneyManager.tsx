@@ -40,7 +40,6 @@ function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: num
                                 <TableRow>
                                     
                                     <TableCell>장소</TableCell>
-                                    <TableCell align="right">입금</TableCell>
                                     <TableCell align="right">출금</TableCell>
                                     <TableCell align="right">인원수</TableCell>
                                     <TableCell align="right">인당 지출</TableCell>
@@ -51,7 +50,6 @@ function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: num
                                 {data.map((item) => (
                                     <TableRow key={item.id}>
                                         <TableCell component="th" scope="row">{item.place}</TableCell>
-                                        <TableCell align="right">{item.inMoney}</TableCell>
                                         <TableCell align="right">{item.outMoney}</TableCell>
                                         <TableCell align="right">{item.headCount}</TableCell>
                                         <TableCell align="right">{item.outMoney / item.headCount}</TableCell>

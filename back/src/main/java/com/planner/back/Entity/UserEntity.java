@@ -15,11 +15,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String name;
-    private String role;
-    private String provider;
-    private String providerId;
 
 
     public UserEntity(String name, String email) {

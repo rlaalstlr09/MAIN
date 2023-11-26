@@ -19,9 +19,11 @@ public class MoneyManagerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private Date date;
+    @Column(nullable = false)
     private String email;
-    private int inMoney;
+    @Column(nullable = false)
     private int outMoney;
     private String place;
     private int headCount;
