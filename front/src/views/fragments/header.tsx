@@ -1,7 +1,7 @@
 import { TabContext, TabList } from "@mui/lab";
-import { Box, Button, Tab } from "@mui/material";
+import { Box, Button, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LogoutButton from "../Login/LogoutButton";
 import './css/Header.css'
 import axios from "axios";
@@ -13,12 +13,17 @@ import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
 
 export default function Header() {
     
-    const [value, setValue] = React.useState('1');
+   
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+    const location = useLocation();
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+    let selectedTabIndex;
+    if(location.pathname.startsWith('/map')) selectedTabIndex = 1;
+    else if(location.pathname.startsWith('/calendar')) selectedTabIndex = 2;
+    else if(location.pathname.startsWith('/check')) selectedTabIndex = 3;
+    else if(location.pathname.startsWith('/money')) selectedTabIndex = 4;
+    else selectedTabIndex = false;
+
 
   const handleLogout = async () => {
     try {
@@ -55,44 +60,34 @@ export default function Header() {
 
 return(
     
-<Box style={{ backgroundColor: '#5599FF' }} sx={{  width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChange} aria-label="lab API tabs example">
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Box className="tab-list" sx={{}}>
-
-                                    <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
-                                    <img className="logo" src="Logo.png" alt="logo" />
-                                    </Link>
+    <Box style={{ backgroundColor: 'rgb(97, 81, 64)' }} sx={{  width: '100vw', typography: 'body1'}}>
+        <div className="header">
+        <Tabs value={selectedTabIndex} >
+            <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
+                <img className="logo" src="Logo4.png" alt="logo" />
+            </Link>
                                     
-                                    <Tab style={{ marginRight: '10px' }} icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
-                                    <Tab style={{ marginRight: '10px' }} icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
-                                    <Tab style={{ marginRight: '10px' }} icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
-                                    <Tab style={{ marginRight: '10px' }} icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
-                               
-                                </Box>
-                            </Box>
-                            <Box sx={{position: 'relative', right: '50px', ml:'auto', marginTop:'20px'}}>
-                                    {isLogin ? (
-                                        <>
-                                        <LogoutButton onLogout={handleLogout} />
-                                        <span>{name} 님 환영합니다. </span>
-                                        </>
-                                         
-                                    ): (
-                                        <>
-                                        <Button variant="contained" onClick={ LoginHandler}>로그인</Button>
-                                        <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-                                        </>
-                                    )}
-                                    </Box> 
-                        </TabList>
-
-                        
-                    </Box> 
-                </TabContext>
-            </Box>
+            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
+            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
+            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
+            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
+            
+            <Box sx={{position: 'relative', right: '50px', ml:'auto', marginTop:'20px'}}>
+                {isLogin ? (
+                    <>
+                    <LogoutButton onLogout={handleLogout} />
+                    <span>{name} 님 환영합니다. </span>                        
+                    </>
+                    ): (
+                    <>
+                    <Button variant="contained" onClick={ LoginHandler}>로그인</Button>
+                    <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
+                    </>
+                    )}
+            </Box> 
+        </Tabs>    
+        </div>        
+    </Box>
             
 )
 }

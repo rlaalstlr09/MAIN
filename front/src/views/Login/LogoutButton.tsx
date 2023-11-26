@@ -27,7 +27,9 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
                 handleClose={() => setOpen(false)}
                 handleConfirm={handleLogout}
                 />
+                
             </div>
+            
         </div>
     );
 };

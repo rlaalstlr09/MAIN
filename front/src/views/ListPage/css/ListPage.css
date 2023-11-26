@@ -6,12 +6,27 @@
     width: 100%;
     flex-direction: row;
     min-height: 100vh;
+    
   }
 
-.calendar {
-    width: 60%;
-    height: 60%;
+.outline {
+  min-width: 900px;
+  
+  width: 80%;
+  min-height: 80vh;
+ 
+  border: 1px solid;
+  border-color: rgb(97, 81, 64);
+  border-radius: 10px;
+  background-color: white;
+  
   }
+.calendar{
+  width:80%;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+}
 
 .Button{
   display: flex;
@@ -20,4 +35,41 @@
 .write{
   width:130px;
   height: 50px;
+}
+.check-table{
+
+}
+
+.input-text{
+  display: flex;
+}
+
+.add-button{
+  width: 50px;
+  height: 50px;
+}
+
+.alt{
+  margin-top: 10%;
+  justify-content: center;
+  text-align: center;
+}
+
+.alt-icon{
+  font-size: 80px;
+}
+
+/* 토요일의 배경색을 라이트 블루로 설정 */
+.fc-sat {
+  background: lightblue;
+}
+
+/* 일요일과 공휴일의 배경색을 연한 빨강으로 설정 */
+.fc-sun {
+  background: #FFB6C1;
+}
+
+/* 맨 위에 연도, 날짜를 가운데 정렬 */
+.fc-toolbar-title {
+  text-align: center;
 }

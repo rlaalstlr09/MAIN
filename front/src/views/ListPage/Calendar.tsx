@@ -32,7 +32,8 @@ export default function CalendarPage() {
 
   return (
     <div className="App">
-      <div className='calendar'>
+      <div className='outline'>
+        <div className="calendar">
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
@@ -48,7 +49,7 @@ export default function CalendarPage() {
     </div>
     <div className="Button">
     <WriteButton redirectPath='/calendar/planner/write'/>
-    
+    </div>
   </div>
 </div>
   );

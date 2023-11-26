@@ -132,9 +132,6 @@ const Map = (props: propsType) => {
       const el = document.createElement('li');
       let itemStr = `
           <div class="info">
-            <span class="marker marker_${index+1}">
-              ${index+1}
-            </span>
             <a href="${places.place_url}">
               <h5 class="info-item place-name">${places.place_name}</h5>
               ${

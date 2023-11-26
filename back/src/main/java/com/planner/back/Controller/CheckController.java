@@ -8,6 +8,7 @@ import com.planner.back.Service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -84,4 +86,31 @@ public class CheckController {
 
         repository.deleteById(id);
     }
+
+    @PutMapping("api/check/checked/{id}")
+    public CheckListEntity updateCheckStatus(@PathVariable Long id, @RequestBody Map<String, Boolean> body) throws ChangeSetPersister.NotFoundException {
+        // 체크리스트 항목을 찾습니다.
+        CheckListEntity checkList = repository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+
+        // 체크 상태를 변경합니다.
+        checkList.setChecked(body.get("checked"));
+
+        // 변경된 체크리스트를 저장하고 반환합니다.
+        return repository.save(checkList);
+    }
+
+    @PutMapping("/api/check/checked/all")
+    public Iterable<CheckListEntity> updateAllCheckStatus(HttpServletRequest request, @RequestBody Map<String, Boolean> body) {
+        // 모든 체크리스트 항목을 가져옵니다.
+        Iterable<CheckListEntity> allCheckLists = repository.findByEmail(sessionService.getCurrentUserEmail(request));
+
+        // 각 체크리스트 항목의 체크 상태를 변경합니다.
+        for (CheckListEntity checkList : allCheckLists) {
+            checkList.setChecked(body.get("checked"));
+        }
+
+        // 변경된 체크리스트를 저장하고 반환합니다.
+        return repository.saveAll(allCheckLists);
+    }
 }
+
