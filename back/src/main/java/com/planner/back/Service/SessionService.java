@@ -1,7 +1,7 @@
 package com.planner.back.Service;
 
+import com.planner.back.Entity.UserEntity;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Service

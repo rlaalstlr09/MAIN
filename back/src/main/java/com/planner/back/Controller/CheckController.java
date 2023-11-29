@@ -59,7 +59,7 @@ public class CheckController {
 
     @PutMapping("/api/check/{id}")
     public CheckListEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody CheckListEntity newCheckList) {
-        String email = (String) sessionService.getCurrentUserEmail(request);
+        String email = sessionService.getCurrentUserEmail(request);
         return repository.findById(id)
 
                 .map(checkList -> {
@@ -78,7 +78,7 @@ public class CheckController {
 
     @DeleteMapping("/api/check/{id}")
     public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
-        String email = (String) sessionService.getCurrentUserEmail(request);
+        String email = sessionService.getCurrentUserEmail(request);
         CheckListEntity checkList = repository.findById(id).orElseThrow(() -> new RuntimeException("체크리스트가 존재하지 않습니다."));
         if(!checkList.getEmail().equals(email)) {
             throw new RuntimeException("권한이 없습니다.");

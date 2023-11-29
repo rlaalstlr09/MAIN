@@ -22,10 +22,12 @@
   
   }
 .calendar{
-  width:80%;
+  width: 100%;
   height: 80%;
+ display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .Button{
@@ -36,9 +38,7 @@
   width:130px;
   height: 50px;
 }
-.check-table{
 
-}
 
 .input-text{
   display: flex;

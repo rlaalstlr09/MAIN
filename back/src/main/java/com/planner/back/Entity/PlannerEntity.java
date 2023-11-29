@@ -21,8 +21,9 @@ public class PlannerEntity {
     private Long id;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
-    private String email;
+
+   private String email;
+
     @Column(nullable = false)
     private Date date;
 

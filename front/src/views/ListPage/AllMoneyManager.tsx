@@ -98,7 +98,9 @@ export default function MoneyPage() {
     return (
         <div className="App"> 
         <div className='outline'> 
-            <h4>예산관리</h4><br/>
+        <Box
+            sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}>
+            <h1>예산관리</h1><br/>
             {Object.keys(groupedData).length > 0 ? (
             <TableContainer>
                 <Table>
@@ -123,6 +125,7 @@ export default function MoneyPage() {
             <br/>
             <WriteButton redirectPath='/money/write'/>
         </div>
+        </Box>
         </div>
         </div>
     );

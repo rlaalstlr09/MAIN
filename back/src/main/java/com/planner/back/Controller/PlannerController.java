@@ -119,7 +119,7 @@ public class PlannerController {
     }
     @DeleteMapping("/api/planner/{id}")
     public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
-        String email = (String) sessionService.getCurrentUserEmail(request);
+        String email = sessionService.getCurrentUserEmail(request);
         PlannerEntity planner = plannerRepository.findById(id).orElseThrow(() -> new RuntimeException("계획표가 존재하지 않습니다."));
         if(!planner.getEmail().equals(email)) {
             throw new RuntimeException("권한이 없습니다.");

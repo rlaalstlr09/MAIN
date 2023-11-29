@@ -46,7 +46,7 @@ public class MoneyController {
 
     @PutMapping("/api/money/{id}")
     public MoneyManagerEntity updateCheckList(HttpServletRequest request, @PathVariable Long id, @RequestBody MoneyManagerEntity newMoneyManager) {
-        String email = (String) sessionService.getCurrentUserEmail(request);
+        String email =  sessionService.getCurrentUserEmail(request);
         return repository.findById(id)
 
                 .map(moneyManager -> {
@@ -55,7 +55,6 @@ public class MoneyController {
                     }
                     moneyManager.setDate(newMoneyManager.getDate());
                     moneyManager.setPlace(newMoneyManager.getPlace());
-                    moneyManager.setInMoney(newMoneyManager.getInMoney());
                     moneyManager.setOutMoney(newMoneyManager.getOutMoney());
                     moneyManager.setHeadCount(newMoneyManager.getHeadCount());
                     return repository.save(moneyManager);
@@ -68,9 +67,9 @@ public class MoneyController {
 
     @DeleteMapping("/api/money/{id}")
     public void deleteCheckList(HttpServletRequest request, @PathVariable Long id) {
-        String email = (String) sessionService.getCurrentUserEmail(request);
+        String uId = sessionService.getCurrentUserEmail(request);
         MoneyManagerEntity moneyManager = repository.findById(id).orElseThrow(() -> new RuntimeException("예산관리가 존재하지 않습니다."));
-        if(!moneyManager.getEmail().equals(email)) {
+        if(!moneyManager.getEmail().equals(uId)) {
             throw new RuntimeException("권한이 없습니다.");
         }
 

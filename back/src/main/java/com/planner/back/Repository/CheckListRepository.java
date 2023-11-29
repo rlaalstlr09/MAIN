@@ -1,6 +1,7 @@
 package com.planner.back.Repository;
 
 import com.planner.back.Entity.CheckListEntity;
+import com.planner.back.Entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,6 +17,7 @@ public interface CheckListRepository extends JpaRepository <CheckListEntity, Lon
     @Modifying
     @Query("update checkList c set c.checked = :checked where c.id = :id")
     int updateChecked(@Param("id") Long id, @Param("checked") boolean checked);
+
 
     List<CheckListEntity> findByEmail(String email);
 }

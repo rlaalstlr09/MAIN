@@ -6,7 +6,7 @@ import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } fro
 import WriteButton from '../component/WriteButton';
 import DeleteButton from '../component/DeleteButton';
 import './css/ListPage.css';
-import { Box, TextField } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -136,40 +136,40 @@ export default function CheckPage() {
                 </div>
                 <div className='alt'>
                 {checkList.length > 0 ? (
-                    <table className='check-table'>
-                        <thead>
-                        <tr>
-                            <th>
+                    <Table className='check-table'>
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>
                                 <Checkbox 
                                 size='medium'
                                 checked={allChecked}
                                 onChange={handleCheckAll}/>
-                            </th>
-                            <th>할 일</th>
-                            <th>장소</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                            </TableCell>
+                            <TableCell>할 일</TableCell>
+                            <TableCell>장소</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
                         {checkList.map(item =>
-                            <tr key={item.id} className='checklist'>
-                            <td>
+                            <TableRow key={item.id} className='checklist'>
+                            <TableCell>
                                 <Checkbox
                                 checked={item.checked} 
                                 onChange={() => handleCheck(item.id)}
                                 />
-                            </td>
-                            <td>{item.todo}</td>
-                            <td>{item.place}</td>
-                            <td>
+                            </TableCell>
+                            <TableCell>{item.todo}</TableCell>
+                            <TableCell>{item.place}</TableCell>
+                            <TableCell>
                                 <Button />
                                 <DeleteButton id={item.id} getData={getCheckList} path="check" />
-                            </td>
-                            </tr>
+                            </TableCell>
+                            </TableRow>
                             
                         )}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                     ) : (
                     <>
                     <FontAwesomeIcon className='alt-icon' icon={faCircleXmark} />
