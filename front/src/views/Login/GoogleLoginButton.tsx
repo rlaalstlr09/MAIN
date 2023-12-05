@@ -29,7 +29,7 @@ export default function GoogleLoginModal({ isOpen, onClose }: GoogleLoginModalPr
     display: 'flex',  
     flexDirection: 'column', 
     alignItems: 'center',  
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',

@@ -80,29 +80,21 @@ interface PlannerModalProps {
         <Modal
           open={open}
           onClose={onClose}
+          className='planner-modal'
         >
-          <Box sx={modalStyle}>
+          <div className='paper'>
             <IconButton
               aria-label="close"
               onClick={onClose}
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
+              className='closeButton'
             >
               <CloseIcon />
             </IconButton>
 
             <IconButton aria-label="menu"
               onClick={handleClick}
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 45,
-                color: (theme) => theme.palette.grey[500],
-              }} aria-haspopup="true" color='success'>
+              className='menuButton'
+               aria-haspopup="true" color='success'>
                   <MoreVertIcon  color='info'/>
                   </IconButton>
 
@@ -124,14 +116,13 @@ interface PlannerModalProps {
                     </MenuItem>
                   </Menu>
                
-            <h2>{plan?.todo}</h2>
-            <p>• 시간: {plan?.start_time} ~ {plan?.end_time}</p>
-            <p>• 장소: {plan?.place}</p>
-            <p>• 메모: {plan?.memo}</p>
-            {/* 여기에 추가적인 상세 정보를 표시할 수 있습니다. */}
-          </Box>
+            <h2 className='modal-title'>{plan?.todo}</h2>
+            <p className='details'>• 시간: {plan?.start_time} ~ {plan?.end_time}</p>
+            <p className='details'>• 장소: {plan?.place}</p>
+            <p  className='details'>• 메모: {plan?.memo}</p>
+             {/* 여기에 추가적인 상세 정보를 표시할 수 있습니다. */}
+          </div>
         </Modal>
       );
 };
-
 export default PlannerModal;
