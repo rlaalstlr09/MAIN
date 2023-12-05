@@ -1,4 +1,4 @@
-import { Button, Fab } from "@mui/material";
+import { Button, Fab, Menu, MenuItem } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FC, MouseEvent, useState } from "react";
@@ -7,14 +7,16 @@ import { Add as AddIcon } from '@mui/icons-material';
 
 interface WriteButtonProps {
     redirectPath: string;
+    text:string;
 }
 
-const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
+const DateWriteButton: FC<WriteButtonProps> = ({ redirectPath, text })  => {
     const navigate = useNavigate();
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
     const handleWriteButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+       
         try {
             
             const response = await axios.get('http://localhost:8080/api/session', { 
@@ -43,11 +45,10 @@ const WriteButton: FC<WriteButtonProps> = ({ redirectPath })  => {
 
     return(
         <div>
-            <Fab size='large' color="primary" aria-label="add" style={{ position: 'fixed', bottom: 100, right: 80 }} onClick={handleWriteButton}>
-                <AddIcon fontSize="large"/>
-            </Fab>
+            <Button style={{textAlign:'left',paddingLeft: 0, fontSize:'15px',color:'black'}}onClick={handleWriteButton}>{text}</Button>
             <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-        </div>
+       
+    </div>
     )
 }
-export default WriteButton;
+export default DateWriteButton;

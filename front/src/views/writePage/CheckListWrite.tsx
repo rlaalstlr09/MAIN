@@ -3,13 +3,18 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 
 
 export default function CWritePage() {
 
-    const [place, setPlace] = useState('');
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const initialPlace = queryParams.get('place') || '';
+  
+    const [place, setPlace] = useState(initialPlace);
     const [todo, setTodo] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

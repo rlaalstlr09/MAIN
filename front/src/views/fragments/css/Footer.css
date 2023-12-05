@@ -1,6 +1,7 @@
 .footer {
-    padding-top: 20px; /* 최소 마진 */
+    padding-top: 30px; /* 최소 마진 */
     width: 100%;
     padding: 15px 0;
     text-align: center;
+    bottom: auto;
 }

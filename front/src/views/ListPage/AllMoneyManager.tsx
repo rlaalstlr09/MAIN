@@ -7,6 +7,8 @@ import DeleteButton from '../component/DeleteButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import './css/ListPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface MoneyManager {
     id: number;
@@ -17,8 +19,8 @@ interface MoneyManager {
     headCount:number;
 }
 
-function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: number) => void, getMoneyManager: () => void }) {
-    const { date, data, handleUpdate, getMoneyManager } = props;
+function Row(props: { date: string, data: MoneyManager[],total: number, handleUpdate: (id: number) => void, getMoneyManager: () => void }) {
+    const { date, data, total, handleUpdate, getMoneyManager } = props;
     const [open, setOpen] = useState(false);
 
     return (
@@ -29,7 +31,8 @@ function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: num
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell colSpan={7}>{date}</TableCell>
+                <TableCell>{date}</TableCell>
+                <TableCell>{total}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
@@ -43,7 +46,7 @@ function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: num
                                     <TableCell align="right">출금</TableCell>
                                     <TableCell align="right">인원수</TableCell>
                                     <TableCell align="right">인당 지출</TableCell>
-                                    <TableCell align="right">수정/삭제</TableCell>
+                                    <TableCell align="center"></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -52,10 +55,10 @@ function Row(props: { date: string, data: MoneyManager[], handleUpdate: (id: num
                                         <TableCell component="th" scope="row">{item.place}</TableCell>
                                         <TableCell align="right">{item.outMoney}</TableCell>
                                         <TableCell align="right">{item.headCount}</TableCell>
-                                        <TableCell align="right">{item.outMoney / item.headCount}</TableCell>
-                                        <TableCell align="right">
-                                            <Button onClick={() => handleUpdate(item.id)}>수정</Button>
+                                        <TableCell align="right">{item.outMoney / item.headCount}원</TableCell>
+                                        <TableCell align="right" style={{display:'flex'}}>
                                             <DeleteButton id={item.id} getData={getMoneyManager} path="money" />
+                                            <Button onClick={() => handleUpdate(item.id)}>수정</Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -99,28 +102,36 @@ export default function MoneyPage() {
         <div className="App"> 
         <div className='outline'> 
         <Box
-            sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}>
+            sx={{ m: 1, width: '80%', margin: '0 auto', mt: "4%" }}>
             <h1>예산관리</h1><br/>
+            <div className='alt'>
             {Object.keys(groupedData).length > 0 ? (
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell />
-                            <TableCell>날짜</TableCell>
-                            <TableCell>총 지출</TableCell>
+                            <TableCell><big>날짜</big></TableCell>
+                            <TableCell><big>총 지출</big></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Object.entries(groupedData).map(([date, data]) => (
-                            <Row key={date} date={date} data={data}  handleUpdate={handleUpdate} getMoneyManager={getMoneyManager} />
-                        ))}
+                    {Object.entries(groupedData).map(([date, data]) => {
+                        const totalExpenditure = data.reduce((sum, item) => sum + item.outMoney, 0);
+                        return (
+                            <Row key={date} date={date} data={data} total={totalExpenditure} handleUpdate={handleUpdate} getMoneyManager={getMoneyManager} />
+                        );
+                    })}
                     </TableBody>
                 </Table>
             </TableContainer>
             ) : (
-                <p>작성된 예산관리 내역이 없습니다.</p>
+                <>
+                <FontAwesomeIcon className='alt-icon' icon={faCircleXmark} />
+                <p>작성된 예산관리가 없습니다.</p>
+                </>
               )}
+              </div>
             <div>
             <br/>
             <WriteButton redirectPath='/money/write'/>

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
-import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
 import WriteButton from '../component/WriteButton';
 import DeleteButton from '../component/DeleteButton';
 import './css/ListPage.css';
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Box, IconButton, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import Checkbox from '@mui/material/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -24,8 +23,12 @@ interface CheckList {
 export default function CheckPage() {
 
     const { id } = useParams();  // URL의 경로 파라미터에서 ID를 가져옵니다.
-    
-    const [place, setPlace] = useState('');
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const initialPlace = queryParams.get('place') || '';
+  
+    const [place, setPlace] = useState(initialPlace);
     const [todo, setTodo] = useState('');
     const [allChecked, setAllChecked] = useState<boolean>(false);
 
@@ -122,7 +125,7 @@ export default function CheckPage() {
             <div className="outline">
             <Box
             component="form"
-            sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+            sx={{ m: 1, width: '80%', margin: '0 auto', marginTop: '4%' }}
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
@@ -132,10 +135,11 @@ export default function CheckPage() {
                 
                 <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/>
                 <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/>
-                <Button variant="outlined" type='submit'><AddIcon/></Button>
+                <IconButton type='submit' size='large' color='inherit'><AddBoxOutlinedIcon style={{fontSize:'55px'}}/></IconButton>
                 </div>
-                <div className='alt'>
+                
                 {checkList.length > 0 ? (
+                  <div className='checklist-table'>
                     <Table className='check-table'>
                         <TableHead>
                         <TableRow>
@@ -145,9 +149,9 @@ export default function CheckPage() {
                                 checked={allChecked}
                                 onChange={handleCheckAll}/>
                             </TableCell>
-                            <TableCell>할 일</TableCell>
-                            <TableCell>장소</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell align='center' width={'300px'}><big>할 일</big></TableCell>
+                            <TableCell align='center' width={'300px'}><big>장소</big></TableCell>
+                            <TableCell align='center'></TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
@@ -159,10 +163,11 @@ export default function CheckPage() {
                                 onChange={() => handleCheck(item.id)}
                                 />
                             </TableCell>
-                            <TableCell>{item.todo}</TableCell>
-                            <TableCell>{item.place}</TableCell>
-                            <TableCell>
-                                <Button />
+                            <TableCell align='center'>{item.todo}</TableCell>
+                            <TableCell align='center'>{item.place}</TableCell>
+                            <TableCell align='center' style={{display:'flex'}}>
+                            <Button onClick={() => handleUpdate(item.id)}>수정</Button>
+                        
                                 <DeleteButton id={item.id} getData={getCheckList} path="check" />
                             </TableCell>
                             </TableRow>
@@ -170,16 +175,14 @@ export default function CheckPage() {
                         )}
                         </TableBody>
                     </Table>
+                    </div>
                     ) : (
-                    <>
+                      <div className='alt'>
                     <FontAwesomeIcon className='alt-icon' icon={faCircleXmark} />
                     <p>작성된 체크리스트가 없습니다.</p>
-                    </>
-                    )}
                     </div>
-                <div className="Button">
-                <WriteButton redirectPath='/check/write'/>
-             </div>
+                    )}
+                  
             </Box>
             </div>
             

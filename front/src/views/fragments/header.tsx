@@ -60,31 +60,31 @@ export default function Header() {
 
 return(
     
-    <Box style={{ backgroundColor: 'rgb(97, 81, 64)' }} sx={{  width: '100vw', typography: 'body1'}}>
+    <Box style={{ backgroundColor: '#000035' }} sx={{  width: '100vw', typography: 'body1'}}>
         <div className="header">
         <Tabs value={selectedTabIndex} >
             <Link to="/"> {/* 로고 클릭 시 루트 경로로 이동 */}
                 <img className="logo" src="Logo4.png" alt="logo" />
             </Link>
-                                    
-            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
-            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
-            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
-            <Tab style={{ marginRight: '10px', fontSize:'15px', color:'#fffff0' }} icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
-            
-            <Box sx={{position: 'relative', right: '50px', ml:'auto', marginTop:'20px'}}>
+                              
+            <Tab style={{ marginRight: '30px', fontSize:'15px', color:'#fffff0' }} icon={<MapOutlinedIcon />} label="지도" component={Link} to="/map" />
+            <Tab style={{ marginRight: '30px', fontSize:'15px', color:'#fffff0' }} icon={<CalendarMonthOutlinedIcon/>}label="계획표" component={Link} to="/calendar" />
+            <Tab style={{ marginRight: '30px', fontSize:'15px', color:'#fffff0' }} icon={<CheckBoxOutlinedIcon/>}label="체크리스트" component={Link} to="/check" />
+            <Tab style={{ marginRight: '30px', fontSize:'15px', color:'#fffff0' }} icon={<LocalAtmOutlinedIcon/>}label="예산관리" component={Link} to="/money" />
+           
+            <div className="login">
                 {isLogin ? (
                     <>
                     <LogoutButton onLogout={handleLogout} />
-                    <span>{name} 님 환영합니다. </span>                        
+                    <span style={{marginTop: '3px'}}>{name} 님 환영합니다. </span>                        
                     </>
                     ): (
                     <>
-                    <Button variant="contained" onClick={ LoginHandler}>로그인</Button>
+                    <Button variant="contained" onClick={ LoginHandler}>Login</Button>
                     <GoogleLoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
                     </>
                     )}
-            </Box> 
+            </div>
         </Tabs>    
         </div>        
     </Box>

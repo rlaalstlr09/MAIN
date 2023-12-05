@@ -30,7 +30,15 @@ public class PlanEntity {
     @Column(nullable = false)
     private String end_time;
 
+    @Column(nullable = false)
     private String todo;
+
     private String memo;
+
+    @Column(nullable = false)
     private String place;
+
+    public Date getPlannerDate() {
+        return planner.getDate();
+    }
 }

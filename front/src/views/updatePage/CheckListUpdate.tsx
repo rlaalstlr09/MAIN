@@ -64,21 +64,29 @@ export default function CUpdatePage() {
     return (
      
         <Box
-      component="form"
-      sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
-      noValidate
-      autoComplete="off"
-      onSubmit={handleSubmit}
-  >
-            <h4>체크리스트 수정</h4><br/>
+        display={'flex'}
+        alignItems="center"
+  justifyContent="center"
+           component="form"
+           sx={{ m: 1, width: '100%', margin: '0 auto', mt: 3 }}
+           noValidate
+           autoComplete="off"
+           onSubmit={handleSubmit}
+       >
+         <div className="write-outline">
+           <div className="write-form">
+              <h2 style={{marginBottom:'3%'}}>체크리스트 수정</h2>
             <Stack spacing={2}>
             <TextField fullWidth label="할 일" id="_todo" value={todo} onChange={e=> setTodo(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <div>
-            <Button type = "submit" variant="contained" >수정</Button>
-            <Button variant="contained" onClick={() => navigate('/check')}>취소</Button>
-            </div>
             </Stack>
+            <div className='button-form'>
+            <Button className='write-button' type = "submit" variant="contained" >수정</Button>
+            <Button className='write-button' variant="outlined" onClick={() => navigate('/check')}>취소</Button>
+            </div>
+            
+            </div>
+            </div>
         </Box>
     );
   }

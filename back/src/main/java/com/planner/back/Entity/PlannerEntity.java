@@ -19,10 +19,12 @@ public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String title;
 
-   private String email;
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private Date date;

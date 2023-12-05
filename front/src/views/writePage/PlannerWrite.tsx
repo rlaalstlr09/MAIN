@@ -3,8 +3,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 
   interface Plan {
@@ -18,11 +21,16 @@ import Stack from '@mui/material/Stack';
   }
   
   const PWritePage = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const initialDate = queryParams.get('date') || '';
+  const initialPlace = queryParams.get('place') || '';
     const [plans, setPlans] = useState<Plan[]>([
-      { title: "", todo: "", date:"",start_time: "", end_time: "", place: "", memo: "" }
+      { title: "", todo: "", date:"",start_time: "", end_time: "", place: initialPlace, memo: "" }
     ]);
     const [plannerTitle, setPlannerTitle] = useState("");
-    const [plannerDate, setPlannerDate] = useState("");
+    const [plannerDate, setPlannerDate] = useState(initialDate);
     const navigate = useNavigate();
   
     const handleAddPlan = () => {
@@ -74,19 +82,24 @@ import Stack from '@mui/material/Stack';
       }
     };
   return(
+   
      <Box
+      display="flex"
       component="form"
-      sx={{ m: 1, width: '80%', margin: '0 auto', mt: 3 }}
+      alignItems="center"
+  justifyContent="center"
+      sx={{ m: 1, width: '100%', margin: '0 auto', mt: 3 }}
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
   >
-     
-          <h4>계획표 작성</h4>
+        <div className="write-outline">
+            <div className="write-form">
+          <h1>계획표 작성</h1>
           <Stack spacing={2}>
-          <TextField fullWidth label="제목" value={plannerTitle} onChange={e => setPlannerTitle(e.target.value)} />
-            <TextField fullWidth InputLabelProps={{shrink: true, }} label="날짜" type="date" value={plannerDate} onChange={e => setPlannerDate(e.target.value)} />
-                   
+          <TextField style={{width:'500px' , margin:'20px auto'}} variant="standard" label="제목" value={plannerTitle} onChange={e => setPlannerTitle(e.target.value)} />
+          <TextField style={{width:'500px', margin:'20px auto'}} variant="standard" InputLabelProps={{shrink: true, }} label="날짜" type="date" value={plannerDate} onChange={e => setPlannerDate(e.target.value)} />
+                   <br/>
           {plans.map((plan, index) => (
               <div key={index} className='planner-text'>
                
@@ -94,16 +107,24 @@ import Stack from '@mui/material/Stack';
                   <TextField fullWidth InputLabelProps={{shrink: true, }} label="시작 시간" id={`start_time_${index}`} type="time" value={plan.start_time} onChange={e => handleChangePlan(index, 'start_time', e.target.value)} />
                   <TextField fullWidth InputLabelProps={{shrink: true, }} label="끝 시간" id={`end_time_${index}`} type="time" value={plan.end_time} onChange={e => handleChangePlan(index, 'end_time', e.target.value)} />
                   <TextField fullWidth label="장소" id={`place_${index}`} value={plan.place} onChange={e => handleChangePlan(index, 'place', e.target.value)} />
-                  <TextField fullWidth label="메모" id={`memo_${index}`} value={plan.memo} onChange={e => handleChangePlan(index, 'memo', e.target.value)} />
+                  <TextField fullWidth multiline label="메모" id={`memo_${index}`} value={plan.memo} onChange={e => handleChangePlan(index, 'memo', e.target.value)} />
+                 
+                  <IconButton aria-label="delete" onClick={() => handleRemovePlan(index)}><DeleteIcon fontSize='medium'/></IconButton>
                   
-                  <Button onClick={() => handleRemovePlan(index)}>계획 삭제</Button>
                   
               </div>
           ))}
-          <Button onClick={handleAddPlan}>계획 추가</Button>
-          <Button type="submit">저장</Button>
-          <Button variant="contained" onClick={() => navigate('/calendar')}>취소</Button>
-      </Stack>
+            </Stack>
+          <div className='add-button-form'>
+            <hr className='hr'/>
+          <IconButton style={{backgroundColor:'white'}} size='large' onClick={handleAddPlan}><AddIcon color='secondary' fontSize='large'/></IconButton>
+          </div>
+          <div className='button-form'>
+          <Button className='write-button' variant="contained" type="submit">저장</Button>
+          <Button className='write-button' variant="outlined" onClick={() => navigate('/calendar')}>취소</Button>
+          </div>  
+      </div>
+      </div>
   </Box>
 );
 }

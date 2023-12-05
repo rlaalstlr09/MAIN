@@ -34,11 +34,12 @@ export default function GoogleLoginModal({ isOpen, onClose }: GoogleLoginModalPr
     left: '50%',
     transform: 'translate(-50%, -50%)',
     gap: 2,
-    width: 500,
-    height: 500,
+    width: 400,
+    height: 400,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+    
   };
 
   return (
@@ -59,12 +60,21 @@ export default function GoogleLoginModal({ isOpen, onClose }: GoogleLoginModalPr
         >
           <CloseIcon />
         </IconButton>
-    <Typography variant="h4" component="div" gutterBottom>
-    로그인이 필요합니다.<br/>
+        <div className="login-logo">
+        <img className="logo" src="Logo2.png" alt="logo" />
+        </div>
+        <div className="modal">
+      
+    <Typography variant="h3" component="div" marginLeft={'30px'}>
+    Login<br/>
     </Typography>
+    
+    </div>
+    <hr className='modal-hr'/>
     <a href="http://localhost:8080/oauth2/authorization/google">
       <img src="GoogleLogin.png" alt="Login with Google" />
     </a>
+    
     </Box>
     </Modal>
   );

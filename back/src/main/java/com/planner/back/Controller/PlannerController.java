@@ -5,17 +5,17 @@ import com.planner.back.Entity.PlannerEntity;
 import com.planner.back.Repository.PlanRepository;
 import com.planner.back.Repository.PlannerRepository;
 import com.planner.back.Service.SessionService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -56,6 +56,11 @@ public class PlannerController {
     @GetMapping("/api/planner")
     public List<PlannerEntity> getAllPlanner(HttpServletRequest request){
         return plannerRepository.findByEmail(sessionService.getCurrentUserEmail(request));
+    }
+
+    @GetMapping("/api/planner/plan/{Id}")
+    public PlanEntity getPlan(@PathVariable Long Id){
+        return planRepository.findById(Id).orElseThrow(EntityNotFoundException::new);
     }
 
     @GetMapping("/api/planner/{id}")

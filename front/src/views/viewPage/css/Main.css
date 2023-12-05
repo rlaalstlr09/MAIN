@@ -4,6 +4,7 @@ body {
   padding: 0;
   width: 100vw;
   background-image: url('../../../../public/main-pattern2.png');
+ background-color: #F5F5F5 ;
   font-family:-apple-system,Noto Sans KR,Roboto,Helvetica,Arial,sans-serif;
 }
 
@@ -20,10 +21,15 @@ body {
   
   position: absolute;
   top: 50%;
-  right: -15%;
+  right: 0%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  background: rgba(0,0,0,0.5); color: white;
+   width: 50%;
+   height: 55%;
+   border-radius: 50px;
+   padding-bottom: 3%;
   }
 
   .title-image{
@@ -39,7 +45,8 @@ body {
   }
 #main-title{
   font-family: 'Pacifico' , cursive;
-  font-size: 3vw;
+  
+  font-size: 4vw;
 }
 @media screen and (max-height: 600px) {
   #main-title{
@@ -79,7 +86,7 @@ body {
     color:brown;
     opacity: 0.15;
   }
-  
+
   .btn-hr{
     width:100px;
     border-top:3px solid lightsalmon;
@@ -106,5 +113,18 @@ body {
   }
 
   .main-info{
-    font-size: 20px;
+    font-size: 1vw;
+  }
+
+  .modal{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    
+  }
+
+  .modal-hr{
+    margin-bottom: 50px;
+    width: 100%;
+    border: 1px solid lightgray;
   }

@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import AlertDialog from "./AlertDialog";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface DeleteButtonProps {
     id: number;
@@ -25,7 +26,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, getData, path }) => {
 
     return (
         <div>
-            <Button onClick={() => setOpen(true)}>삭제</Button>
+            <IconButton onClick={() => setOpen(true)}><DeleteIcon/></IconButton>
             <AlertDialog
                 open={open}
                 title="삭제 확인"

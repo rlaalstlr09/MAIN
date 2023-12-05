@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Stack } from '@mui/material';
+import { InputAdornment, Stack } from '@mui/material';
 
 export default function MUpdatePage() {
 
@@ -78,28 +78,33 @@ export default function MUpdatePage() {
        };
     return (
      
-        <Box
-            component="form"
-            sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-        >
-            <h4>예산관리 수정</h4>
+      <Box
+      display={'flex'}
+      alignItems="center"
+justifyContent="center"
+         component="form"
+         sx={{ m: 1, width: '100%', margin: '0 auto', mt: 3 }}
+         noValidate
+         autoComplete="off"
+         onSubmit={handleSubmit}
+     >
+       <div className="write-outline">
+         <div className="write-form">
+            <h1 style={{marginBottom:'3%'}}>예산관리 수정</h1>
             <Stack spacing={2}>
             <TextField fullWidth label="날짜" type="date" id="_date" value={date} onChange={e=> setDate(e.target.value)}/><br/>
             <TextField fullWidth label="장소" id="_place" value={place} onChange={e=> setPlace(e.target.value)}/><br/>
-            <TextField fullWidth label="사용 예산" id="_outMoney" value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
-            <TextField fullWidth label="입금 예산" id="_inMoney" value={inMoney} onChange={handleIntegerInput(setInMoney)}/><br/>
+            <TextField fullWidth label="지출액" id="_outMoney" InputProps={{
+    endAdornment: <InputAdornment position="end">원</InputAdornment>,
+  }}value={outMoney} onChange={handleIntegerInput(setOutMoney)}/><br/>
             <TextField fullWidth label="인원 수" id="_headCount" value={headCount} onChange={handleIntegerInput(setHeadCount)}/><br/>
-            <div>
-            <Button type = "submit" variant="contained" >수정</Button>
-            <Button variant="contained" onClick={() => navigate('/money')}>취소</Button>
-            </div>
             </Stack>
+            <div className='button-form'>
+            <Button className='write-button' type = "submit" variant="contained" >수정</Button>
+            <Button className='write-button' variant="outlined" onClick={() => navigate('/money')}>취소</Button>
+            </div>
+            </div>
+            </div>
         </Box>
     );
   }

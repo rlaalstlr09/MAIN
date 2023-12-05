@@ -13,7 +13,7 @@ export default function MainPage() {
 
   return (
     <div className="main-container">
-      <div className="outline">
+      <div className="main-outline">
       <div className="title-image">
         <img id = "main-image" src="main-image8.jpg" alt = "메인 이미지"/>
       <div className='title'>

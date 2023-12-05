@@ -19,7 +19,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
     return(
         <div>
             <div className="Button">
-                <Button onClick={()=>setOpen(true)} variant="contained" className="logout">로그아웃</Button>  
+                <Button onClick={()=>setOpen(true)} variant="contained" className="logout">Logout</Button>  
                 <AlertDialog
                 open={open}
                 title="로그아웃"
