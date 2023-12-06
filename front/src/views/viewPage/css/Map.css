@@ -15,6 +15,7 @@
     border-radius: 10px;
     background-color: white;
     align-items: center;
+    box-shadow: 10px 10px 10px 5px rgba(0,0,0,0.5);
 }
 
 .btn-box{
@@ -43,6 +44,7 @@
     height: 70vh;
     margin-bottom: 5%;
     border: black 1px solid;
+    
 }
 #search-result{
     min-width:40%;

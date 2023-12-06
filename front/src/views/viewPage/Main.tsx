@@ -1,13 +1,29 @@
 
-import { Button } from '@mui/material';
-import React from 'react';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './css/Main.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faCircleCheck, faMapLocationDot, faSackDollar } from '@fortawesome/free-solid-svg-icons';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function MainPage() {
+  const [Value, setValue] = useState('');
+  const [Keyword, setKeyword] = useState('');
+
+  const valueChecker = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (Value === "") {
+      alert ("검색어를 입력해주세요.")
+    }  else {
+      setKeyword(Value);
+      navigate(`/map?keyword=${Value}`);
+    }
+  }
+  const keywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }
   
     const navigate = useNavigate();
 
@@ -18,9 +34,21 @@ export default function MainPage() {
         <img id = "main-image" src="main-image8.jpg" alt = "메인 이미지"/>
       <div className='title'>
         <h1 id="main-title">PlanIt</h1>
-        <p className='main-info'>"PlanIt"은 손쉽게 여행 계획을 세울 수 있도록 지도와 달력 기능을 제공합니다.</p>
+        <p className='main-info'>PlanIt은 손쉽게 여행 계획을 세울 수 있도록 지도와 달력 기능을 제공합니다.</p>
         <p className='main-info'>체크리스트로 할 일을 관리하고 예산관리 기능으로 지출 내역을 쉽게 파악할 수 있습니다.</p>
       </div>
+      </div>
+      <div className="main-search">
+        <h3 style={{background: 'rgba(0,0,0,0.5)', color: 'white'}}>원하는 장소를 검색 해보세요 !</h3><br/>
+      <TextField id='movie-title' InputProps={{
+    endAdornment: (
+      <InputAdornment  className ='btn-box' position="end">
+        <IconButton className='btn' onClick={valueChecker}>
+          <SearchIcon />
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}value={Value} className='form_input' name="place" onChange={keywordChange} placeholder="검색어를 입력해주세요. " required />
       </div>
       <div className='button-container'>
       

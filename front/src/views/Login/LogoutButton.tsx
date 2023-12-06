@@ -2,6 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import axios from "axios";
 import React, { useState } from "react";
 import AlertDialog from "../component/AlertDialog";
+import { useNavigate } from "react-router";
 
 interface LogoutButtonProps {
     onLogout: () => void;
@@ -9,11 +10,13 @@ interface LogoutButtonProps {
 
 const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
 
     const handleLogout = () => {
       onLogout();
       setOpen(false);
+      navigate('/');
     };
 
     return(

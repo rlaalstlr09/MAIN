@@ -54,7 +54,7 @@ const LandingPage = ():JSX.Element => {
         </IconButton>
       </InputAdornment>
     ),
-  }}value={Value} className='form_input' name="place" onChange={keywordChange} placeholder="검색어를 입력해주세요. (ex: 강남 맛집)" required />
+  }}value={Value} className='form_input' name="place" onChange={keywordChange} placeholder="검색어를 입력해주세요." required />
             </label>
           </form>
         </div>

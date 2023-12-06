@@ -28,7 +28,7 @@ body {
   background: rgba(0,0,0,0.5); color: white;
    width: 50%;
    height: 55%;
-   border-radius: 50px;
+   border-radius: 10px;
    padding-bottom: 3%;
   }
 
@@ -63,12 +63,13 @@ body {
     position: relative;
     gap:30px;
     margin:5% 0;
-    
+    padding: 5% 0;
+   
   }
   
  
   .main-button {
-    min-width: 200px; /* 버튼의 너비를 동일하게 설정 */
+    min-width: 220px; /* 버튼의 너비를 동일하게 설정 */
     min-height: 300px;
     width: 20%;
     margin: 20px 10px;
@@ -83,7 +84,7 @@ body {
     right: -35px;
 
     font-size: 200px;
-    color:brown;
+    color: lightblue;
     opacity: 0.15;
   }
 
@@ -127,4 +128,29 @@ body {
     margin-bottom: 50px;
     width: 100%;
     border: 1px solid lightgray;
+  }
+
+  .main-search{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+    padding: 10% 0;
+    background-color: #F5F5F5;
+    background-image: url('../../../../public/map3.jpg');
+    background-size: cover;
+    border-bottom: 1px solid;
+    opacity: 0.5;
+    
+  }
+
+  #movie-title{
+    background-color: white;
+    border: 0.5px solid;
+  }
+
+  .btn{
+    background-color: white;
   }
