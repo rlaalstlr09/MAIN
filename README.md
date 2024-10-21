@@ -1,9 +1,12 @@
 # 📅 PlanIt
 <div>
   
-  ![ERD](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/main.png)
+  ![main](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/main.png)
   
 </div>
+
+<br>
+
 <ul>
   <li>사용자가 간편하게 여행 계획을 작성할 수 있도록 도와주는 여행 플래너 작성 서비스</li>
   <li>지도 검색, 계획표, 체크리스트, 예산관리 등의 기능</li>
