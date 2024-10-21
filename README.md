@@ -20,7 +20,6 @@
   <img src="https://img.shields.io/badge/css3-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" />
   <img src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black" /> <br>
   <img src="https://img.shields.io/badge/material--ui-%230081CB.svg?&style=for-the-badge&logo=material-ui&logoColor=white" />
-  <img src="https://img.shields.io/badge/Google_OAuth2-%234285F4.svg?&style=for-the-badge&logo=google&logoColor=white" />
   <img src="https://img.shields.io/badge/Kakao_Map_API-%23FFCD00.svg?&style=for-the-badge&logo=kakao&logoColor=black" />
   <img src="https://img.shields.io/badge/Full_Calendar-%23EEEEEE.svg?&style=for-the-badge&logo=calendar&logoColor=black" />
 </div>
@@ -30,7 +29,7 @@
 <div>
   <img src="https://img.shields.io/badge/Spring_Boot-%236DB33F.svg?&style=for-the-badge&logo=spring&logoColor=white" />
   <img src="https://img.shields.io/badge/SpringSecurity-%236DB33F.svg?&style=for-the-badge&logo=springsecurity&logoColor=white" /> <br>
-  
+  <img src="https://img.shields.io/badge/Google_OAuth2-%234285F4.svg?&style=for-the-badge&logo=google&logoColor=white" />
   
   #### 🗄️ DataBase
   <img src="https://img.shields.io/badge/mysql-%234479A1.svg?&style=for-the-badge&logo=mysql&logoColor=white" />
