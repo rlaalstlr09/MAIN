@@ -1,6 +1,8 @@
 # 📅 PlanIt
 <div>
   
+  ![ERD](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/main.png)
+  
 </div>
 <ul>
   <li>사용자가 간편하게 여행 계획을 작성할 수 있도록 도와주는 여행 플래너 작성 서비스</li>
@@ -15,7 +17,7 @@
 
 <div>
   <img src="https://img.shields.io/badge/react-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=black" />
-   <img src="https://img.shields.io/badge/typescript-%233178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white" /> 
+  <img src="https://img.shields.io/badge/typescript-%233178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white" /> 
   <img src="https://img.shields.io/badge/html5-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white" />
   <img src="https://img.shields.io/badge/css3-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" />
   <img src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black" /> <br>
@@ -45,11 +47,13 @@
 2023/09/05 ~ 2023/12/05
 
 ## 🗂 DB설계
-![ERD](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/ER%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.png)
+![ERD](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/erd.png)
 ## 🗺 사이트 맵
-![SITEMAP](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/%EC%82%AC%EC%9D%B4%ED%8A%B8%EB%A7%B5.png)
+![SITEMAP](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/sitemap.png)
+## 🔄 통신 순서
+![작동순서](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/작동로직.png)
 ## 🎤 프레젠테이션
-[티켓보라PDF](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/%ED%8B%B0%EC%BC%93%EB%B3%B4%EB%9D%BC.pdf)
+[PlanItPPT](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/PlanIt_PPT.pdf)
 
 ## 💌 프로젝트 후기
 
