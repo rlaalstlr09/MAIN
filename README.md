@@ -11,6 +11,8 @@
   <li>실제 여행 갔을 때의 불편함에서 착안</li>
 </ul>
 
+<br>
+
 ## 🖥️ 기술스택
 
 ### 🌐 프론트엔드
@@ -43,17 +45,32 @@
 
 <img src="https://img.shields.io/badge/github-%23181717.svg?&style=for-the-badge&logo=github&logoColor=white" />
 
+<br>
+
 ## 🗓️ 프로젝트 기간
 2023/09/05 ~ 2023/12/05
 
+<br>
+
 ## 🗂 DB설계
 ![ERD](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/erd.png)
+
+<br>
+
 ## 🗺 사이트 맵
 ![SITEMAP](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/sitemap.png)
+
+<br>
+
 ## 🔄 통신 순서
 ![작동순서](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/작동로직.png)
+
+<br>
+
 ## 🎤 프레젠테이션
 [PlanItPPT](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/PlanIt_PPT.pdf)
+
+<br>
 
 ## 💌 프로젝트 후기
 
@@ -67,6 +84,7 @@ DB 설계와 프로젝트 설계, 세팅부터 시작하여 혼자서 풀스택 
 
 처음 사용하는 언어와 API에 대한 이해도가 부족하여 코드가 깔끔하지 못한 점도 아쉬움으로 남습니다
 
+<br>
 
 ## 📃 LICENSE
 
