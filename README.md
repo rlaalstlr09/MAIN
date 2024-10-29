@@ -75,6 +75,11 @@
 
 <br>
 
+## 📋 보고서
+[PlanIt](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/PlanIt.pdf)
+
+<br>
+
 ## 💌 프로젝트 후기
 
 React, Google OAuth2, Kakao Map API 등 처음 사용하는 기술로 프로젝트를 완료하였습니다.
