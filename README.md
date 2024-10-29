@@ -71,12 +71,12 @@
 <br>
 
 ## 🎤 프레젠테이션
-[PlanItPPT](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/PlanIt_PPT.pdf)
+[PlanItPPT](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/PlanIt_PPT.pdf)
 
 <br>
 
 ## 📋 보고서
-[PlanIt](https://github.com/rlaalstlr09/Musical/blob/main/portfolio/PlanIt.pdf)
+[보고서](https://github.com/rlaalstlr09/PlanIt/blob/save/portfolio/PlanIt.pdf)
 
 <br>
 
